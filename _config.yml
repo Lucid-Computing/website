@@ -1,0 +1,45 @@
+# Jekyll Configuration
+title: Lucid Computing
+description: AI Security and Verification Solutions
+
+# Collections for blog posts
+collections:
+  posts:
+    output: false  # We'll handle posts manually in our pages
+    permalink: /blog/:name/
+    
+# Defaults for posts collection
+defaults:
+  - scope:
+      path: "blog/posts"
+      type: "posts"
+    values:
+      layout: null
+
+# Markdown processor
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  syntax_highlighter: rouge
+
+# Include files that would otherwise be excluded
+include:
+  - wrangler.toml
+
+# Exclude files from processing
+exclude:
+  - Makefile
+  - README.md
+  - __pycache__/
+  - "*.py"
+  - _plugins
+  - _scripts
+  - .github
+  - vendor
+  - _site
+
+# Site settings
+baseurl: ""
+url: "https://lucidcomputing.ai"
