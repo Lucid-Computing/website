@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify AI Passport — Lucid Computing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Verify Page Layout */
+        .vp-page {
+            min-height: 100vh;
+            background: #0a0a0a;
+            color: #e4e4e7;
+            font-family: var(--font-sans);
+        }
+
+        .vp-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .vp-topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            color: #eab308;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .vp-topbar-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            color: #a1a1aa;
+            font-size: 0.8125rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .vp-topbar-link:hover {
+            color: #fff;
+        }
+
+        .vp-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        /* Section 1: Verification Status */
+        .vp-status-banner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .vp-status-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #22c55e;
+            font-size: 1.25rem;
+        }
+
+        .vp-status-text {
+            flex: 1;
+        }
+
+        .vp-status-title {
+            display: block;
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: #22c55e;
+            letter-spacing: 0.02em;
+        }
+
+        .vp-status-desc {
+            display: block;
+            font-size: 0.75rem;
+            color: #a1a1aa;
+            margin-top: 0.125rem;
+        }
+
+        /* Passport Embed Container */
+        .vp-passport-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .vp-passport-label {
+            font-size: 0.625rem;
+            font-weight: 600;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Override passport overlay to display inline */
+        .vp-passport-embed .passport-card-popup {
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .vp-passport-embed .pp-pages-container {
+            min-height: 480px;
+            max-height: 480px;
+        }
+
+        .vp-issued-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            margin-top: 0.75rem;
+            font-size: 0.6875rem;
+            color: #a1a1aa;
+        }
+
+        .vp-issued-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .vp-crypto-note {
+            font-size: 0.8125rem;
+            color: #a1a1aa;
+            line-height: 1.7;
+            margin-top: 1.25rem;
+        }
+
+        /* Section Dividers */
+        .vp-section {
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .vp-section-label {
+            font-size: 0.625rem;
+            font-weight: 700;
+            color: #eab308;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .vp-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: var(--font-accent);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .vp-section-subtitle {
+            font-size: 0.875rem;
+            color: #a1a1aa;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .vp-body-text {
+            font-size: 0.9375rem;
+            color: #d4d4d8;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        /* What Is a Passport — Question Cards */
+        .vp-question-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.625rem;
+            margin: 1.25rem 0 1.5rem;
+        }
+
+        .vp-question-card {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            font-size: 0.8125rem;
+            color: #e4e4e7;
+        }
+
+        .vp-question-icon {
+            font-size: 1.125rem;
+            flex-shrink: 0;
+        }
+
+        /* Don't Trust Us — Green Callout */
+        .vp-callout {
+            padding: 1.25rem;
+            background: rgba(34, 197, 94, 0.06);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .vp-callout-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vp-callout-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid #22c55e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #22c55e;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .vp-callout-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #22c55e;
+        }
+
+        .vp-callout-text {
+            font-size: 0.8125rem;
+            color: #a1a1aa;
+            line-height: 1.6;
+            padding-left: 1.875rem;
+        }
+
+        /* Attestation Explainer */
+        .vp-explainer {
+            padding: 1.25rem;
+            background: rgba(234, 179, 8, 0.04);
+            border: 1px solid rgba(234, 179, 8, 0.15);
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .vp-explainer-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #eab308;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .vp-explainer-text {
+            font-size: 0.8125rem;
+            color: #d4d4d8;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        .vp-explainer-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .vp-explainer-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 0.75rem 0;
+        }
+
+        .vp-explainer-step {
+            display: flex;
+            gap: 0.625rem;
+            font-size: 0.8125rem;
+            color: #d4d4d8;
+            line-height: 1.5;
+        }
+
+        .vp-explainer-step-num {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(234, 179, 8, 0.15);
+            color: #eab308;
+            font-size: 0.625rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .vp-analogy {
+            font-size: 0.8125rem;
+            color: #a1a1aa;
+            font-style: italic;
+            padding: 0.75rem 1rem;
+            border-left: 3px solid rgba(234, 179, 8, 0.3);
+            margin-top: 0.75rem;
+        }
+
+        /* Bullet Points */
+        .vp-bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .vp-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #d4d4d8;
+            line-height: 1.5;
+        }
+
+        .vp-bullet-icon {
+            color: #22c55e;
+            font-size: 0.875rem;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+
+        /* Section 4: Verify Steps */
+        .vp-verify-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .vp-verify-step {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .vp-verify-step:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .vp-verify-step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vp-verify-step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(234, 179, 8, 0.15);
+            color: #eab308;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .vp-verify-step-title {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .vp-verify-step-desc {
+            font-size: 0.8125rem;
+            color: #a1a1aa;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            padding-left: 2.125rem;
+        }
+
+        .vp-verify-step-action {
+            padding-left: 2.125rem;
+        }
+
+        /* Reuse pp- button styles from styles.css */
+
+        /* Footer */
+        .vp-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+        }
+
+        .vp-footer-text {
+            font-size: 0.75rem;
+            color: #71717a;
+            line-height: 1.6;
+        }
+
+        .vp-footer-brand {
+            font-weight: 600;
+            color: #a1a1aa;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .vp-container {
+                padding: 1.5rem 1rem 3rem;
+            }
+            .vp-question-grid {
+                grid-template-columns: 1fr;
+            }
+            .vp-section-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="vp-page">
+        <!-- Top Bar -->
+        <div class="vp-topbar">
+            <a href="../index.html" class="vp-topbar-brand">
+                <i class="ph ph-shield" style="font-size:1.25rem"></i>
+                Lucid Computing
+            </a>
+            <a href="../index.html" class="vp-topbar-link">
+                Visit Website
+                <i class="ph ph-arrow-right" style="font-size:0.875rem"></i>
+            </a>
+        </div>
+
+        <div class="vp-container">
+
+            <!-- Section 1: Verification Status -->
+            <div class="vp-status-banner">
+                <div class="vp-status-icon">
+                    <i class="ph ph-shield-check"></i>
+                </div>
+                <div class="vp-status-text">
+                    <span class="vp-status-title">THIS IS A VERIFIED LUCID AI PASSPORT</span>
+                    <span class="vp-status-desc">Cryptographically signed by hardware root of trust</span>
+                </div>
+            </div>
+
+            <!-- Embedded Full Passport -->
+            <div class="vp-passport-container">
+                <div class="vp-passport-label">Passport</div>
+                <div class="vp-passport-embed">
+                    <div class="passport-card-popup">
+
+                        <!-- Header -->
+                        <div class="pp-header">
+                            <div class="pp-header-row">
+                                <i class="ph ph-shield" style="font-size:1.25rem;color:#eab308"></i>
+                                <span class="pp-title">AI PASSPORT</span>
+                                <span class="pp-verified">VERIFIED</span>
+                            </div>
+                            <div class="pp-identity">
+                                <div class="pp-identity-main">
+                                    <span class="pp-model-name" id="vp-model-name">Loading...</span>
+                                    <span class="pp-operator" id="vp-operator"></span>
+                                </div>
+                                <div class="pp-meta">
+                                    <button class="pp-model-id" id="vp-copy-model-id" title="Click to copy">
+                                        <span id="vp-model-hash">sha256:...</span>
+                                        <i class="ph ph-copy" style="font-size:0.625rem"></i>
+                                    </button>
+                                    <span class="pp-meta-sep">&middot;</span>
+                                    <span class="pp-location">
+                                        <i class="ph ph-map-pin" style="font-size:0.625rem"></i>
+                                        <span id="vp-region-text">Loading...</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pages Container -->
+                        <div class="pp-pages-container" id="vp-pages">
+                            <!-- Page 0: Summary -->
+                            <div class="pp-page active" data-page="0">
+                                <div class="pp-tier-header">
+                                    <span class="pp-tier-title">SECURITY &amp; COMPLIANCE</span>
+                                    <span class="pp-tier-badge">All 12 Passed</span>
+                                </div>
+                                <div class="pp-auditor-cards" id="vp-tier1-cards"></div>
+
+                                <button class="pp-tier2-toggle" id="vp-tier2-toggle" type="button">
+                                    <span class="pp-tier2-toggle-title">QUALITY &amp; MONITORING</span>
+                                    <span class="pp-tier2-toggle-action">
+                                        <i class="ph ph-caret-down pp-tier2-chevron" id="vp-tier2-chevron"></i>
+                                        <span id="vp-tier2-label">Show 6</span>
+                                    </span>
+                                </button>
+                                <div class="pp-auditor-cards pp-tier2-cards" id="vp-tier2-cards" style="display:none"></div>
+
+                                <div class="pp-compliance-footer">
+                                    <div class="pp-compliance-row">
+                                        <span class="pp-compliance-label">Complies with:</span>
+                                        <div class="pp-compliance-badges">
+                                            <span class="pp-framework-badge">SOC 2</span>
+                                            <span class="pp-framework-badge">GDPR</span>
+                                            <span class="pp-framework-badge">HIPAA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Page 1: Compliance Mappings -->
+                            <div class="pp-page" data-page="1">
+                                <div class="pp-compliance-page-header">
+                                    <i class="ph ph-scales" style="font-size:1.25rem;color:#14b8a6"></i>
+                                    <div>
+                                        <span class="pp-compliance-page-title">Compliance Mappings</span>
+                                        <span class="pp-compliance-page-subtitle">4 controls mapped across 3 frameworks</span>
+                                    </div>
+                                </div>
+                                <div class="pp-compliance-entries" id="vp-compliance-entries"></div>
+                            </div>
+
+                            <!-- Page 14: Verify -->
+                            <div class="pp-page" data-page="14">
+                                <div class="pp-verify-header">
+                                    <i class="ph ph-shield-warning" style="font-size:1.25rem;color:#f59e0b"></i>
+                                    <div>
+                                        <span class="pp-verify-title">Never Trust, Always Verify</span>
+                                        <span class="pp-verify-subtitle">Don't even take our word for it</span>
+                                    </div>
+                                </div>
+                                <p class="pp-verify-intro">Every claim in this passport is backed by cryptographic attestations signed by hardware root of trust. You can independently verify them.</p>
+                                <div class="pp-verify-section">
+                                    <div class="pp-verify-step-header"><span class="pp-step-number">1</span><span class="pp-step-title">Download Attestation Bundle</span></div>
+                                    <p class="pp-step-desc">Get the signed attestation quotes and certificate chains.</p>
+                                    <button class="pp-download-btn" id="vp-download-bundle"><i class="ph ph-download-simple" style="font-size:0.875rem"></i><span>Download Bundle (.json)</span></button>
+                                </div>
+                                <div class="pp-verify-section">
+                                    <div class="pp-verify-step-header"><span class="pp-step-number">2</span><span class="pp-step-title">Verify Hardware Quote</span></div>
+                                    <p class="pp-step-desc">Use vendor tools to verify the attestation quote.</p>
+                                    <button class="pp-code-block" id="vp-copy-verify-cmd" title="Click to copy"><code>snpguest verify attestation ./report.bin ./certs/</code><i class="ph ph-copy pp-copy-icon" style="font-size:0.75rem"></i></button>
+                                </div>
+                                <div class="pp-verify-section">
+                                    <div class="pp-verify-step-header"><span class="pp-step-number">3</span><span class="pp-step-title">Compare Measurements</span></div>
+                                    <p class="pp-step-desc">Confirm runtime measurements match expected values.</p>
+                                    <a href="#" class="pp-text-link"><span>View Transparency Log</span><i class="ph ph-arrow-square-out" style="font-size:0.75rem"></i></a>
+                                </div>
+                                <div class="pp-verify-section pp-verify-section-last">
+                                    <div class="pp-verify-step-header"><span class="pp-step-number">4</span><span class="pp-step-title">Hardware Vendor Services</span></div>
+                                    <p class="pp-step-desc">Fetch certificate chains directly from hardware vendors.</p>
+                                    <div class="pp-vendor-links">
+                                        <a href="https://kdsintf.amd.com" target="_blank" rel="noopener noreferrer" class="pp-vendor-link"><span>AMD KDS</span><i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i></a>
+                                        <a href="https://api.trustedservices.intel.com/sgx/certification/v4" target="_blank" rel="noopener noreferrer" class="pp-vendor-link"><span>Intel PCS</span><i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i></a>
+                                        <a href="https://nras.attestation.nvidia.com" target="_blank" rel="noopener noreferrer" class="pp-vendor-link"><span>NVIDIA NRAS</span><i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="pp-pagination" id="vp-pagination">
+                            <button class="pp-page-btn" id="vp-prev" disabled><i class="ph ph-caret-left"></i></button>
+                            <span class="pp-page-info" id="vp-page-info">1 / 15</span>
+                            <button class="pp-page-btn" id="vp-next"><i class="ph ph-caret-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vp-issued-info">
+                    <span><i class="ph ph-calendar-blank" style="font-size:0.75rem"></i> Issued: 2026-02-15T10:30:00Z</span>
+                    <span><i class="ph ph-clock" style="font-size:0.75rem"></i> Valid for: 24 hours</span>
+                    <span><i class="ph ph-arrows-clockwise" style="font-size:0.75rem"></i> Auto-refreshed</span>
+                </div>
+            </div>
+
+            <p class="vp-crypto-note">
+                This passport was cryptographically issued by Lucid Computing's Trusted Execution Environment. The claims above are signed by hardware root of trust — not by us.
+            </p>
+
+            <!-- Section 2: What Is an Agent Passport? -->
+            <div class="vp-section">
+                <div class="vp-section-label">Understanding Passports</div>
+                <div class="vp-section-title">What Is an AI Agent Passport?</div>
+                <div class="vp-section-subtitle">"A nutrition label for AI"</div>
+
+                <p class="vp-body-text">
+                    An AI Passport is a real-time certificate that travels with every AI agent deployed through Lucid Computing. It answers the questions people actually care about:
+                </p>
+
+                <div class="vp-question-grid">
+                    <div class="vp-question-card">
+                        <i class="ph ph-lock vp-question-icon" style="color:#3b82f6"></i>
+                        Is my data protected?
+                    </div>
+                    <div class="vp-question-card">
+                        <i class="ph ph-map-pin vp-question-icon" style="color:#f59e0b"></i>
+                        Where is it processed?
+                    </div>
+                    <div class="vp-question-card">
+                        <i class="ph ph-shield vp-question-icon" style="color:#ef4444"></i>
+                        Has the model been tampered with?
+                    </div>
+                    <div class="vp-question-card">
+                        <i class="ph ph-shield-check vp-question-icon" style="color:#22c55e"></i>
+                        Is it safe from prompt attacks?
+                    </div>
+                    <div class="vp-question-card">
+                        <i class="ph ph-sparkle vp-question-icon" style="color:#a855f7"></i>
+                        How accurate is it?
+                    </div>
+                    <div class="vp-question-card">
+                        <i class="ph ph-scales vp-question-icon" style="color:#8b5cf6"></i>
+                        Does it treat everyone equally?
+                    </div>
+                </div>
+
+                <p class="vp-body-text">
+                    Unlike a static compliance report, a passport updates continuously. Each claim is backed by 12 independent auditors that run inside the same encrypted hardware as the AI itself — meaning even the operator can't fake results.
+                </p>
+                <p class="vp-body-text">
+                    When you see an AI Passport, you're looking at a live, cryptographically-signed proof of how the AI is actually behaving — not a promise of how it should behave.
+                </p>
+            </div>
+
+            <!-- Section 3: Don't Trust Us — Verify -->
+            <div class="vp-section">
+                <div class="vp-section-label">Trust Model</div>
+                <div class="vp-section-title">Don't Trust Us — Verify</div>
+
+                <div class="vp-callout">
+                    <div class="vp-callout-header">
+                        <div class="vp-callout-check"><i class="ph ph-check" style="font-size:0.75rem"></i></div>
+                        <span class="vp-callout-title">Lucid Computing confirms this is an official AI Passport</span>
+                    </div>
+                    <p class="vp-callout-text">
+                        This passport was issued by our infrastructure and is currently active. But you shouldn't have to trust us — or anyone — to know that's true.
+                    </p>
+                </div>
+
+                <p class="vp-body-text">
+                    Every claim in this passport is backed by a <strong style="color:#fff">hardware attestation</strong> — a cryptographic proof generated by the CPU itself, not by software. This means:
+                </p>
+
+                <div class="vp-bullets">
+                    <div class="vp-bullet">
+                        <i class="ph ph-check-circle vp-bullet-icon"></i>
+                        <span>The AI actually ran inside encrypted memory (a Trusted Execution Environment)</span>
+                    </div>
+                    <div class="vp-bullet">
+                        <i class="ph ph-check-circle vp-bullet-icon"></i>
+                        <span>The code that ran is exactly the code we said it was</span>
+                    </div>
+                    <div class="vp-bullet">
+                        <i class="ph ph-check-circle vp-bullet-icon"></i>
+                        <span>Nobody — not even Lucid — could see or alter the data while it was being processed</span>
+                    </div>
+                </div>
+
+                <div class="vp-explainer">
+                    <div class="vp-explainer-title">
+                        <i class="ph ph-cpu" style="font-size:0.875rem"></i>
+                        What is hardware attestation?
+                    </div>
+                    <p class="vp-explainer-text">
+                        Modern CPUs from Intel (TDX), AMD (SEV-SNP), and NVIDIA (Hopper CC) can create isolated, encrypted zones called <strong style="color:#fff">Trusted Execution Environments</strong> (TEEs). When code runs inside a TEE, something remarkable happens:
+                    </p>
+                    <div class="vp-explainer-steps">
+                        <div class="vp-explainer-step">
+                            <span class="vp-explainer-step-num">1</span>
+                            <span>The CPU <strong style="color:#fff">measures</strong> exactly what code was loaded — a cryptographic hash of every byte</span>
+                        </div>
+                        <div class="vp-explainer-step">
+                            <span class="vp-explainer-step-num">2</span>
+                            <span>It <strong style="color:#fff">signs</strong> that measurement with a key burned into the chip at the factory — a key that no software can ever read or change</span>
+                        </div>
+                        <div class="vp-explainer-step">
+                            <span class="vp-explainer-step-num">3</span>
+                            <span>Anyone can <strong style="color:#fff">verify</strong> that signature against the chip manufacturer's public key — no trust in Lucid required</span>
+                        </div>
+                    </div>
+                    <p class="vp-explainer-text">
+                        This signed report is called an <strong style="color:#eab308">attestation quote</strong>. It's the CPU saying: <em>"I certify this exact code ran in encrypted memory, and here's my hardware signature to prove it."</em>
+                    </p>
+                    <div class="vp-analogy">
+                        Think of it like a tamper-evident seal — but instead of a physical sticker, it's a cryptographic proof from the silicon itself.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Verify It Yourself -->
+            <div class="vp-section">
+                <div class="vp-section-label">Independent Verification</div>
+                <div class="vp-section-title">Verify It Yourself</div>
+                <p class="vp-body-text" style="margin-bottom:1.5rem">
+                    You don't need to install anything from Lucid. These are open-source tools from the hardware vendors themselves.
+                </p>
+
+                <div class="vp-verify-steps">
+                    <div class="vp-verify-step">
+                        <div class="vp-verify-step-header">
+                            <span class="vp-verify-step-num">1</span>
+                            <span class="vp-verify-step-title">Download Attestation Bundle</span>
+                        </div>
+                        <p class="vp-verify-step-desc">
+                            The raw attestation quote, certificate chain, and measurements — everything you need to independently verify this passport. Nothing from Lucid's servers is required after this download.
+                        </p>
+                        <div class="vp-verify-step-action">
+                            <button class="pp-download-btn" id="vp-download-bundle-2">
+                                <i class="ph ph-download-simple" style="font-size:0.875rem"></i>
+                                <span>Download Bundle (.json)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="vp-verify-step">
+                        <div class="vp-verify-step-header">
+                            <span class="vp-verify-step-num">2</span>
+                            <span class="vp-verify-step-title">Verify the Hardware Signature</span>
+                        </div>
+                        <p class="vp-verify-step-desc">
+                            Use the chip vendor's open-source tools to check that the attestation signature is genuine. This confirms the CPU itself signed the report.
+                        </p>
+                        <div class="vp-verify-step-action">
+                            <button class="pp-code-block" id="vp-copy-verify-cmd-2" title="Click to copy" style="margin-left:0;width:100%">
+                                <code>snpguest verify attestation ./report.bin ./certs/</code>
+                                <i class="ph ph-copy pp-copy-icon" style="font-size:0.75rem"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="vp-verify-step">
+                        <div class="vp-verify-step-header">
+                            <span class="vp-verify-step-num">3</span>
+                            <span class="vp-verify-step-title">Compare Measurements</span>
+                        </div>
+                        <p class="vp-verify-step-desc">
+                            Check the measurements in the attestation quote match what we publish in our transparency log. If they match, you know the exact code that ran.
+                        </p>
+                        <div class="vp-verify-step-action">
+                            <a href="#" class="pp-text-link" style="margin-left:0">
+                                <span>View Transparency Log</span>
+                                <i class="ph ph-arrow-square-out" style="font-size:0.75rem"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="vp-verify-step">
+                        <div class="vp-verify-step-header">
+                            <span class="vp-verify-step-num">4</span>
+                            <span class="vp-verify-step-title">Go Straight to the Source</span>
+                        </div>
+                        <p class="vp-verify-step-desc">
+                            Fetch certificate chains directly from the hardware manufacturers. Don't even trust our copies — get them from Intel, AMD, and NVIDIA themselves.
+                        </p>
+                        <div class="vp-verify-step-action">
+                            <div class="pp-vendor-links" style="margin-left:0">
+                                <a href="https://kdsintf.amd.com" target="_blank" rel="noopener noreferrer" class="pp-vendor-link">
+                                    <span>AMD KDS</span><i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i>
+                                </a>
+                                <a href="https://api.trustedservices.intel.com/sgx/certification/v4" target="_blank" rel="noopener noreferrer" class="pp-vendor-link">
+                                    <span>Intel PCS</span><i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i>
+                                </a>
+                                <a href="https://nras.attestation.nvidia.com" target="_blank" rel="noopener noreferrer" class="pp-vendor-link">
+                                    <span>NVIDIA NRAS</span><i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="vp-footer">
+                <p class="vp-footer-text">
+                    <span class="vp-footer-brand">Lucid Computing</span> &middot; Stockholm, Sweden<br>
+                    This page is publicly accessible. No login required.<br>
+                    Passport data refreshes automatically.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Reuse the same auditor data and rendering logic from the main passport
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- Mock Agent Profiles ---
+            var agentProfiles = {
+                'agent-001': {
+                    name: 'Sovereign Agent',
+                    operator: 'Operated by Lucid Computing',
+                    modelHash: 'sha256:7f3a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9d1',
+                    region: 'Stockholm, SE',
+                    teeType: 'Intel TDX',
+                    issuedAt: '2026-02-15T10:30:00Z',
+                },
+                'agent-002': {
+                    name: 'Compliance Analyst',
+                    operator: 'Operated by Nordea Bank',
+                    modelHash: 'sha256:a1b2c3d4e5f6789012345678abcdef0123456789abcdef0123456789abcdef01',
+                    region: 'Frankfurt, DE',
+                    teeType: 'AMD SEV-SNP',
+                    issuedAt: '2026-02-15T08:15:00Z',
+                },
+                'agent-003': {
+                    name: 'Medical Scribe',
+                    operator: 'Operated by Karolinska University Hospital',
+                    modelHash: 'sha256:deadbeef0123456789abcdef0123456789abcdef0123456789abcdef01234567',
+                    region: 'Stockholm, SE',
+                    teeType: 'Intel TDX',
+                    issuedAt: '2026-02-14T22:45:00Z',
+                },
+                'agent-004': {
+                    name: 'Legal Reviewer',
+                    operator: 'Operated by Mannheimer Swartling',
+                    modelHash: 'sha256:cafebabe0123456789abcdef0123456789abcdef0123456789abcdef01234567',
+                    region: 'Stockholm, SE',
+                    teeType: 'AMD SEV-SNP',
+                    issuedAt: '2026-02-15T06:00:00Z',
+                },
+                'agent-005': {
+                    name: 'Customer Support Bot',
+                    operator: 'Operated by Klarna',
+                    modelHash: 'sha256:1234abcd5678ef0123456789abcdef0123456789abcdef0123456789abcdef01',
+                    region: 'London, UK',
+                    teeType: 'NVIDIA H100 CC',
+                    issuedAt: '2026-02-15T12:00:00Z',
+                },
+            };
+
+            // Parse agent ID from URL
+            // Supports: /verify/agent-002 (path), /verify/?agent=agent-002 (query), /verify/#agent-002 (hash)
+            var agentId = null;
+
+            // 1. Try path: /verify/agent-002
+            var pathParts = window.location.pathname.replace(/\/$/, '').split('/');
+            var lastSegment = pathParts[pathParts.length - 1];
+            if (lastSegment && lastSegment !== 'verify' && lastSegment !== 'index.html' && agentProfiles[lastSegment]) {
+                agentId = lastSegment;
+            }
+
+            // 2. Try query param: ?agent=agent-002
+            if (!agentId) {
+                var params = new URLSearchParams(window.location.search);
+                var qAgent = params.get('agent');
+                if (qAgent && agentProfiles[qAgent]) agentId = qAgent;
+            }
+
+            // 3. Try hash: #agent-002
+            if (!agentId) {
+                var hashVal = window.location.hash.replace('#', '');
+                if (hashVal && agentProfiles[hashVal]) agentId = hashVal;
+            }
+
+            // 4. Fall back to agent-001
+            if (!agentId) {
+                agentId = 'agent-001';
+            }
+            var profile = agentProfiles[agentId];
+
+            // Populate header fields
+            var modelNameEl = document.getElementById('vp-model-name');
+            var operatorEl = document.getElementById('vp-operator');
+            var modelHashEl = document.getElementById('vp-model-hash');
+            var regionEl = document.getElementById('vp-region-text');
+            if (modelNameEl) modelNameEl.textContent = profile.name;
+            if (operatorEl) operatorEl.textContent = profile.operator;
+            if (modelHashEl) modelHashEl.textContent = profile.modelHash.substring(0, 15) + '...';
+            if (regionEl) regionEl.textContent = profile.region;
+
+            // Update page title
+            document.title = 'Verify: ' + profile.name + ' — Lucid Computing';
+
+            // Update issued info
+            var issuedInfoEl = document.querySelector('.vp-issued-info');
+            if (issuedInfoEl) {
+                issuedInfoEl.innerHTML =
+                    '<span><i class="ph ph-calendar-blank" style="font-size:0.75rem"></i> Issued: ' + profile.issuedAt + '</span>' +
+                    '<span><i class="ph ph-clock" style="font-size:0.75rem"></i> Valid for: 24 hours</span>' +
+                    '<span><i class="ph ph-arrows-clockwise" style="font-size:0.75rem"></i> Auto-refreshed</span>';
+            }
+
+            // Update Data Residency auditor to match agent region
+            var regionAuditorOverrides = {
+                'agent-002': { statusValue: 'FRANKFURT', stats: ['Frankfurt (Germany)', 'No cross-border transfers', 'Fully compliant'] },
+                'agent-005': { statusValue: 'LONDON', stats: ['London (United Kingdom)', 'No cross-border transfers', 'Fully compliant'] },
+            };
+
+            // Update Encrypted Computing auditor TEE type to match agent
+            var teeOverrides = {};
+            Object.keys(agentProfiles).forEach(function(id) {
+                teeOverrides[id] = { statusValue: agentProfiles[id].teeType.toUpperCase().replace(/ /g, ' ') };
+            });
+
+            var auditors = [
+                { id: 'pii', humanName: 'Data Shield', question: 'Is personal data protected?', subtitle: 'Names, emails, and phone numbers are automatically removed before processing', answer: 'Removes personal data automatically', icon: 'ph-lock', color: '#3b82f6', statusType: 'badge', statusValue: 'GDPR', stats: ['GDPR mode active', '7,350 items redacted last month', '0 data leaks'], category: 'Compliance', metrics: [{ label: 'PII items redacted', value: 7350, max: 10000, pct: 73 }, { label: 'Data leak incidents', value: 0, max: 10, pct: 0 }, { label: 'Compliance score', value: 100, max: 100, pct: 100 }] },
+                { id: 'sovereignty', humanName: 'Data Residency', question: 'Where is my data stored?', subtitle: 'All computation stays within your chosen geographic region', answer: 'Stays in your region', icon: 'ph-map-pin', color: '#f59e0b', statusType: 'badge', statusValue: 'STOCKHOLM', stats: ['Stockholm (Sweden)', 'No cross-border transfers', 'Fully compliant'], category: 'Compliance', metrics: [{ label: 'Data in-region', value: 100, max: 100, pct: 100 }, { label: 'Cross-border transfers', value: 0, max: 100, pct: 0 }, { label: 'Uptime', value: 99.9, max: 100, pct: 99 }] },
+                { id: 'compute', humanName: 'Encrypted Computing', question: 'Is all my data encrypted?', subtitle: 'AI runs inside encrypted memory that nobody — not even us — can access', answer: 'Encrypted memory nobody can access', icon: 'ph-hard-drives', color: '#8b5cf6', statusType: 'badge', statusValue: 'INTEL TDX', stats: ['TEE hardware attested', 'SLSA Level 3', 'All memory encrypted'], category: 'Security', metrics: [{ label: 'Hardware attestation', value: 100, max: 100, pct: 100 }, { label: 'SLSA level', value: 3, max: 4, pct: 75 }, { label: 'Memory encryption', value: 100, max: 100, pct: 100 }] },
+                { id: 'guardrails', humanName: 'Prompt Firewall', question: 'Is it safe from prompt attacks?', subtitle: 'Every prompt is scanned before the AI sees it', answer: 'Blocks harmful content & attacks', icon: 'ph-shield-check', color: '#22c55e', statusType: 'badge', statusValue: 'ACTIVE', stats: ['385,410 prompts scanned last month', '2,012 malicious prompts blocked', '0 attacks got through'], category: 'Security', metrics: [{ label: 'Prompts scanned', value: 385410, max: 400000, pct: 96 }, { label: 'Attacks blocked', value: 2012, max: 2012, pct: 100 }, { label: 'Bypass rate', value: 0, max: 100, pct: 0 }] },
+                { id: 'policy', humanName: 'Rule Enforcer', question: 'Does it follow your rules?', subtitle: 'Custom business rules are checked on every request and response', answer: 'Enforces your policies', icon: 'ph-file-text', color: '#3b82f6', statusType: 'badge', statusValue: 'ENFORCED', stats: ['5 active rules', '100% compliance rate', '360 violations caught last month'], category: 'Compliance', metrics: [{ label: 'Active rules', value: 5, max: 10, pct: 50 }, { label: 'Compliance rate', value: 100, max: 100, pct: 100 }, { label: 'Violations caught', value: 360, max: 500, pct: 72 }] },
+                { id: 'model-security', humanName: 'Model Scanner', question: 'Has the model been tampered with?', subtitle: 'The AI model is scanned for backdoors, trojans, and unauthorized modifications', answer: 'No backdoors or tampering', icon: 'ph-shield', color: '#ef4444', statusType: 'badge', statusValue: 'SECURE', stats: ['5 integrity scans completed', '0 threats found', 'Checksums verified'], category: 'Security', metrics: [{ label: 'Integrity scans', value: 5, max: 5, pct: 100 }, { label: 'Threats detected', value: 0, max: 10, pct: 0 }, { label: 'Checksum match', value: 100, max: 100, pct: 100 }] },
+                { id: 'eval', humanName: 'AI Evaluator', question: 'How smart and accurate is it?', subtitle: 'Tested against industry benchmarks for knowledge, reasoning, and safety', answer: 'Tested on knowledge & reasoning', icon: 'ph-sparkle', color: '#a855f7', statusType: 'score', statusValue: 92, stats: ['TruthfulQA: 95%', 'CyberSecEval: 98%', 'HarmBench: 91%'], category: 'Evaluation', metrics: [{ label: 'TruthfulQA', value: 95, max: 100, pct: 95 }, { label: 'CyberSecEval', value: 98, max: 100, pct: 98 }, { label: 'HarmBench', value: 91, max: 100, pct: 91 }] },
+                { id: 'fairness', humanName: 'Bias Checker', question: 'Does it treat everyone equally?', subtitle: 'Tested for bias across gender, race, age, and other protected groups', answer: 'Treats everyone equally', icon: 'ph-scales', color: '#8b5cf6', statusType: 'score', statusValue: 88, stats: ['Gender bias: not detected', 'Racial bias: not detected', 'Age bias: minor (monitoring)'], category: 'Evaluation', metrics: [{ label: 'Gender fairness', value: 96, max: 100, pct: 96 }, { label: 'Racial fairness', value: 94, max: 100, pct: 94 }, { label: 'Age fairness', value: 88, max: 100, pct: 88 }] },
+                { id: 'red-team', humanName: 'Stress Tester', question: 'Has it been attacked on purpose?', subtitle: "Professional red-teamers tried to break it — here's how it held up", answer: 'Attacked to find weaknesses', icon: 'ph-crosshair', color: '#ef4444', statusType: 'score', statusValue: 88, stats: ['92% jailbreak resistance', '500+ attack templates tested', '0 critical vulnerabilities'], category: 'Security', metrics: [{ label: 'Jailbreak resistance', value: 92, max: 100, pct: 92 }, { label: 'Attack templates', value: 500, max: 500, pct: 100 }, { label: 'Critical vulns', value: 0, max: 10, pct: 0 }] },
+                { id: 'rag-quality', humanName: 'Source Verifier', question: 'Are its answers grounded in facts?', subtitle: 'Checks that every response is backed by real, retrievable sources', answer: 'Retrieves accurate info', icon: 'ph-magnifying-glass', color: '#06b6d4', statusType: 'score', statusValue: 87, stats: ['87% of claims traced to sources', 'Hallucination rate: 2.1%', 'Sources verified'], category: 'Evaluation', metrics: [{ label: 'Claims grounded', value: 87, max: 100, pct: 87 }, { label: 'Hallucination rate', value: 2.1, max: 100, pct: 2 }, { label: 'Source quality', value: 94, max: 100, pct: 94 }] },
+                { id: 'watermark', humanName: 'Content Fingerprint', question: "Can you tell it's AI-generated?", subtitle: 'Every AI response is invisibly watermarked for content provenance', answer: 'AI content is watermarked', icon: 'ph-fingerprint', color: '#14b8a6', statusType: 'badge', statusValue: 'C2PA', stats: ['57k responses watermarked last month', '100% traceable', 'C2PA credentials attached'], category: 'Observability', metrics: [{ label: 'Responses watermarked', value: 57000, max: 60000, pct: 95 }, { label: 'Traceability', value: 100, max: 100, pct: 100 }, { label: 'C2PA coverage', value: 100, max: 100, pct: 100 }] },
+                { id: 'observability', humanName: 'Audit Trail', question: 'Is there a complete record?', subtitle: 'Every request, response, and decision is logged with a tamper-proof signature', answer: 'Everything is logged', icon: 'ph-activity', color: '#fbbf24', statusType: 'badge', statusValue: 'TEE-SIGNED', stats: ['102k traces recorded last month', '100% cryptographically signed', 'Avg cost: $0.003/req'], category: 'Observability', metrics: [{ label: 'Traces recorded', value: 102000, max: 110000, pct: 93 }, { label: 'Signed coverage', value: 100, max: 100, pct: 100 }, { label: 'Avg cost/req', value: 0.003, max: 0.01, pct: 30 }] },
+            ];
+
+            // Apply per-agent overrides to Data Residency auditor (index 1)
+            if (regionAuditorOverrides[agentId]) {
+                var ro = regionAuditorOverrides[agentId];
+                auditors[1].statusValue = ro.statusValue;
+                auditors[1].stats = ro.stats;
+            } else {
+                // Default to agent's region
+                auditors[1].statusValue = profile.region.split(',')[0].toUpperCase();
+            }
+
+            // Apply TEE type override to Encrypted Computing auditor (index 2)
+            auditors[2].statusValue = profile.teeType.toUpperCase();
+
+            var tier1 = auditors.slice(0, 6);
+            var tier2 = auditors.slice(6, 12);
+            var totalPages = 1 + 1 + auditors.length + 1; // summary + compliance + 12 auditors + verify
+            var currentPage = 0;
+
+            var complianceEntries = [
+                { framework: 'SOC 2', clause: 'CC6.6', auditorName: 'Prompt Firewall', auditorColor: '#22c55e', originalText: 'The entity implements logical access security measures to protect against threats from sources outside its system boundaries.', howWeComply: 'The Guardrails auditor detects and blocks prompt injection attempts, which are external threats that try to bypass AI system boundaries.' },
+                { framework: 'SOC 2', clause: 'PI1.1', auditorName: 'Prompt Firewall', auditorColor: '#22c55e', originalText: 'The entity obtains or generates, uses, and communicates relevant, quality information regarding processing integrity.', howWeComply: 'Toxicity detection ensures AI outputs meet quality and appropriateness standards, maintaining processing integrity.' },
+                { framework: 'SOC 2', clause: 'CC6.1', auditorName: 'Data Shield', auditorColor: '#3b82f6', originalText: 'The entity implements logical access security software, infrastructure, and architectures over protected information assets.', howWeComply: 'PII detection automatically identifies and redacts sensitive personal data before it reaches the model.' },
+                { framework: 'GDPR', clause: 'Art. 25', auditorName: 'Data Residency', auditorColor: '#f59e0b', originalText: 'Data protection by design and by default — the controller shall implement appropriate technical and organisational measures.', howWeComply: 'Data residency controls ensure that processing occurs only within authorized geographic jurisdictions.' },
+            ];
+
+            function renderAuditorCard(a, index) {
+                var statusHTML = '';
+                if (a.statusType === 'score') {
+                    statusHTML = '<span class="pp-score-bar"><span class="pp-score-fill" style="width:' + a.statusValue + '%;background:' + a.color + '"></span></span><span class="pp-score-value" style="color:' + a.color + '">' + a.statusValue + '%</span>';
+                } else {
+                    statusHTML = '<span class="pp-status-check">&#10003;</span><span class="pp-status-badge">' + a.statusValue + '</span>';
+                }
+                var statsHTML = a.stats.map(function(s) { return '<span class="pp-stat-item">&#9702; ' + s + '</span>'; }).join('');
+                return '<button class="pp-auditor-card" data-auditor-index="' + index + '">' +
+                    '<div class="pp-card-header"><div class="pp-card-icon" style="color:' + a.color + '"><i class="ph ' + a.icon + '"></i></div><span class="pp-card-question">' + a.question + '</span><div class="pp-card-status">' + statusHTML + '</div></div>' +
+                    '<div class="pp-card-body"><span class="pp-card-subtitle">' + a.subtitle + '</span><span class="pp-card-answer">' + a.answer + '</span><div class="pp-card-stats">' + statsHTML + '</div></div></button>';
+            }
+
+            function renderAuditorDetailPage(a) {
+                var catBg = 'rgba(107,114,128,0.1)', catColor = '#6b7280';
+                if (a.category === 'Security') { catBg = 'rgba(239,68,68,0.1)'; catColor = '#ef4444'; }
+                else if (a.category === 'Evaluation') { catBg = 'rgba(168,85,247,0.1)'; catColor = '#a855f7'; }
+                else if (a.category === 'Compliance') { catBg = 'rgba(59,130,246,0.1)'; catColor = '#3b82f6'; }
+                else if (a.category === 'Observability') { catBg = 'rgba(251,191,36,0.1)'; catColor = '#fbbf24'; }
+                var metricsHTML = (a.metrics || []).map(function(m) {
+                    var displayVal = m.value >= 1000 ? Math.round(m.value).toLocaleString() : m.value;
+                    return '<div class="pp-metric-item"><span class="pp-metric-label">' + m.label + '</span><div class="pp-metric-bar-container"><div class="pp-metric-bar"><div class="pp-metric-bar-fill" style="width:' + m.pct + '%;background:' + a.color + '"></div></div><span class="pp-metric-value" style="color:' + a.color + '">' + displayVal + '</span></div></div>';
+                }).join('');
+                var statsHTML = a.stats.map(function(s) {
+                    return '<div class="pp-detail-stat-item"><i class="ph ph-check-circle pp-detail-stat-icon"></i><span>' + s + '</span></div>';
+                }).join('');
+                return '<div class="pp-auditor-detail-header"><div class="pp-auditor-detail-icon" style="background:' + catBg + ';color:' + catColor + '"><i class="ph ' + a.icon + '"></i></div><div class="pp-auditor-detail-info"><span class="pp-auditor-detail-name">' + a.humanName + '</span><span class="pp-auditor-detail-category">' + a.category + '</span></div><span class="pp-passed-badge">PASSED</span></div>' +
+                    '<p class="pp-detail-question">' + a.question + '</p><p class="pp-detail-subtitle">' + a.subtitle + '</p><div class="pp-detail-metrics">' + metricsHTML + '</div><div class="pp-detail-stats">' + statsHTML + '</div>';
+            }
+
+            function renderCompliancePage() {
+                return complianceEntries.map(function(e) {
+                    return '<div class="pp-compliance-entry"><div class="pp-compliance-entry-header"><span class="pp-compliance-fw-badge">' + e.framework + '</span><span class="pp-compliance-clause">' + e.clause + '</span></div><div class="pp-compliance-entry-body"><div class="pp-compliance-section"><div class="pp-compliance-section-label"><i class="ph ph-file-text" style="font-size:0.75rem"></i><span>Original Regulation Text</span></div><p class="pp-compliance-original-text">"' + e.originalText + '"</p></div><div class="pp-compliance-section"><div class="pp-compliance-section-label pp-compliance-section-label-green"><i class="ph ph-check-circle" style="font-size:0.75rem"></i><span>How This Auditor Helps</span></div><p class="pp-compliance-how-text">' + e.howWeComply + '</p></div><div class="pp-compliance-auditor-tag"><div class="pp-compliance-auditor-dot" style="background:' + e.auditorColor + '"></div><span>' + e.auditorName + '</span></div></div></div>';
+                }).join('');
+            }
+
+            // Build cards
+            var tier1Container = document.getElementById('vp-tier1-cards');
+            var tier2Container = document.getElementById('vp-tier2-cards');
+            if (tier1Container) tier1Container.innerHTML = tier1.map(function(a, i) { return renderAuditorCard(a, i); }).join('');
+            if (tier2Container) tier2Container.innerHTML = tier2.map(function(a, i) { return renderAuditorCard(a, i + 6); }).join('');
+
+            // Build auditor detail pages
+            var pagesContainer = document.getElementById('vp-pages');
+            if (pagesContainer) {
+                var verifyPage = pagesContainer.querySelector('[data-page="14"]');
+                auditors.forEach(function(a, i) {
+                    var page = document.createElement('div');
+                    page.className = 'pp-page';
+                    page.setAttribute('data-page', String(i + 2));
+                    page.innerHTML = renderAuditorDetailPage(a);
+                    pagesContainer.insertBefore(page, verifyPage);
+                });
+                var complianceEntriesEl = document.getElementById('vp-compliance-entries');
+                if (complianceEntriesEl) complianceEntriesEl.innerHTML = renderCompliancePage();
+            }
+
+            // Pagination
+            var prevBtn = document.getElementById('vp-prev');
+            var nextBtn = document.getElementById('vp-next');
+            var pageInfo = document.getElementById('vp-page-info');
+
+            function showPage(index) {
+                currentPage = Math.max(0, Math.min(index, totalPages - 1));
+                pagesContainer.querySelectorAll('.pp-page').forEach(function(p) { p.classList.remove('active'); });
+                var target = pagesContainer.querySelector('[data-page="' + currentPage + '"]');
+                if (target) target.classList.add('active');
+                if (prevBtn) prevBtn.disabled = (currentPage === 0);
+                if (nextBtn) nextBtn.disabled = (currentPage === totalPages - 1);
+                if (pageInfo) pageInfo.textContent = (currentPage + 1) + ' / ' + totalPages;
+                if (pagesContainer) pagesContainer.scrollTop = 0;
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', function() { showPage(currentPage - 1); });
+            if (nextBtn) nextBtn.addEventListener('click', function() { showPage(currentPage + 1); });
+
+            // Card click → detail page
+            document.querySelectorAll('.pp-auditor-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var idx = parseInt(card.getAttribute('data-auditor-index'), 10);
+                    showPage(idx + 2);
+                });
+            });
+
+            // Tier 2 toggle
+            var tier2Toggle = document.getElementById('vp-tier2-toggle');
+            var tier2Cards = document.getElementById('vp-tier2-cards');
+            var tier2Chevron = document.getElementById('vp-tier2-chevron');
+            var tier2Label = document.getElementById('vp-tier2-label');
+            var tier2Open = false;
+            if (tier2Toggle && tier2Cards) {
+                tier2Toggle.addEventListener('click', function() {
+                    tier2Open = !tier2Open;
+                    tier2Cards.style.display = tier2Open ? 'flex' : 'none';
+                    if (tier2Chevron) tier2Chevron.classList.toggle('open', tier2Open);
+                    if (tier2Label) tier2Label.textContent = tier2Open ? 'Hide 6' : 'Show 6';
+                });
+            }
+
+            // Copy model ID
+            var copyModelIdBtn = document.getElementById('vp-copy-model-id');
+            if (copyModelIdBtn) {
+                copyModelIdBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText(profile.modelHash);
+                    var icon = copyModelIdBtn.querySelector('i');
+                    if (icon) { icon.className = 'ph ph-check'; icon.style.color = '#22c55e'; }
+                    setTimeout(function() { if (icon) { icon.className = 'ph ph-copy'; icon.style.color = ''; } }, 2000);
+                });
+            }
+
+            // Update verify command based on TEE type
+            var verifyCmd = profile.teeType.includes('SEV') ? 'snpguest verify attestation ./report.bin ./certs/' :
+                            profile.teeType.includes('TDX') ? 'tdx_attest verify --quote ./report.bin --certs ./certs/' :
+                            'nv-attestation-sdk verify --gpu-evidence ./report.bin';
+            document.querySelectorAll('#vp-copy-verify-cmd code, #vp-copy-verify-cmd-2 code').forEach(function(el) {
+                el.textContent = verifyCmd;
+            });
+
+            // Copy verify commands
+            ['vp-copy-verify-cmd', 'vp-copy-verify-cmd-2'].forEach(function(id) {
+                var btn = document.getElementById(id);
+                if (btn) {
+                    btn.addEventListener('click', function() {
+                        navigator.clipboard.writeText(verifyCmd);
+                        var icon = btn.querySelector('.pp-copy-icon');
+                        if (icon) { icon.className = 'ph ph-check pp-copy-icon'; icon.style.color = '#22c55e'; }
+                        setTimeout(function() { if (icon) { icon.className = 'ph ph-copy pp-copy-icon'; icon.style.color = ''; } }, 2000);
+                    });
+                }
+            });
+
+            // Download bundle
+            function downloadBundle() {
+                var bundle = {
+                    version: '1.0.0', generated_at: new Date().toISOString(), agent_id: agentId,
+                    agent_name: profile.name, operator: profile.operator,
+                    attestation: { tee_type: profile.teeType, quote: { format: profile.teeType.includes('TDX') ? 'tdx_report' : 'snp_report', data: 'BASE64_ENCODED...', signature: 'BASE64_ENCODED...' }, certificates: { vcek: 'BASE64_ENCODED...', ask: 'BASE64_ENCODED...', ark: 'BASE64_ENCODED...' }, measurements: { launch_measurement: 'sha384:abc123...', host_data: 'sha256:def456...', report_data: profile.modelHash } },
+                    vendor_endpoints: { amd_kds: 'https://kdsintf.amd.com', intel_pcs: 'https://api.trustedservices.intel.com/sgx/certification/v4', nvidia_nras: 'https://nras.attestation.nvidia.com' },
+                };
+                var blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a'); a.href = url; a.download = 'attestation-bundle-' + agentId + '.json';
+                document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+            }
+            ['vp-download-bundle', 'vp-download-bundle-2'].forEach(function(id) {
+                var btn = document.getElementById(id);
+                if (btn) btn.addEventListener('click', downloadBundle);
+            });
+        });
+    </script>
+</body>
+
+</html>
