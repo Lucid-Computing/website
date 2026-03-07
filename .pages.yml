@@ -1,0 +1,128 @@
+media:
+  input: media # Where your images are stored (e.g., 'images' or '.')
+  output: media # Public path for images
+
+content:
+  - name: landing
+    label: Landing Page
+    type: file
+    path: index.html # Rename your HTML file to index.html if it isn't already
+    format: yaml-frontmatter # This adds a data block to the top of your HTML file
+    fields:
+      # --- HERO SECTION ---
+      - name: hero_section
+        type: object
+        label: Hero Section
+        fields:
+          - name: title
+            label: Main Title
+            type: string
+            default: "Lucid Computing"
+          - name: subtitle
+            label: Subtitle
+            type: string # Use string for simple text, or rich-text if you need bolding
+          - name: description
+            label: Description Text
+            type: text
+          - name: button_text
+            label: CTA Button Text
+            type: string
+            default: "Book a Demo"
+      
+      # --- PROBLEM SECTION (STATS) ---
+      - name: stats_section
+        type: object
+        label: Problem Stats
+        fields:
+          - name: stats_list
+            label: Key Statistics
+            type: list
+            fields:
+              - name: value
+                label: Stat Value (e.g., 74%)
+                type: string
+              - name: label
+                label: Label
+                type: string
+              - name: description
+                label: Description
+                type: string
+
+      # --- SOLUTION SECTION ---
+      - name: solution_section
+        type: object
+        label: Solution Features
+        fields:
+          - name: features
+            label: Feature List
+            type: list
+            fields:
+              - name: title
+                label: Feature Title
+                type: string
+              - name: description
+                label: Feature Description
+                type: string
+
+      # --- AUDITS / INDUSTRIES ---
+      - name: industries_section
+        type: object
+        label: Critical Use Cases
+        fields:
+          - name: industries
+            label: Industry Cards
+            type: list
+            fields:
+              - name: title
+                label: Industry Name
+                type: string
+              - name: description
+                label: Description
+                type: string
+
+      # --- FOOTER / CTA ---
+      - name: cta_footer
+        type: object
+        label: Footer CTA
+        fields:
+          - name: heading
+            label: Footer Heading
+            type: string
+          - name: subtext
+            label: Footer Text
+            type: string
+
+  - name: blog
+    label: Blog Posts
+    type: collection
+    path: blog/posts
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+      - name: date
+        label: Date
+        type: date
+      - name: author
+        label: Author
+        type: string
+      - name: tags
+        label: Tags
+        type: list
+      - name: image
+        label: Cover Image
+        type: image
+      - name: description
+        label: Short Description
+        type: string
+      - name: publish
+        label: Publish
+        type: boolean
+        default: false
+      - name: content
+        label: Content
+        type: rich-text

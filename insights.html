@@ -1,0 +1,391 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights - Lucid Computing</title>
+    <!-- Lucid Computing Design System Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="page-insights">
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="lucid-logo.svg" alt="Lucid Computing Logo" class="nav-logo">
+            <div class="nav-text">
+                <span>Lucid</span>
+                <span>Computing</span>
+            </div>
+        </a>
+
+        <!-- Hamburger Menu Toggle -->
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="nav-toggle-icon"></span>
+        </button>
+
+        <div class="nav-links">
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link has-dropdown">Solutions</a>
+                <div class="dropdown-menu">
+                    <a href="solutions/iso-42001-readiness.html" class="dropdown-link">ISO 42001 Readiness</a>
+                    <a href="solutions/eu-ai-act-conformity.html" class="dropdown-link">EU AI Act Conformity</a>
+                    <a href="solutions/hiring-fairness.html" class="dropdown-link">Hiring Fairness</a>
+                    <a href="solutions/clean-data-copyright.html" class="dropdown-link">Clean Data & Copyright</a>
+                    <a href="solutions/clinical-validation-fda.html" class="dropdown-link">Clinical Validation (FDA)</a>
+                    <a href="solutions/sovereign-shield.html" class="dropdown-link">Sovereign Shield</a>
+                </div>
+            </div>
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link has-dropdown">Industries</a>
+                <div class="dropdown-menu">
+                    <a href="industries/finance.html" class="dropdown-link">Finance & Banking</a>
+                    <a href="industries/healthcare.html" class="dropdown-link">Healthcare & Life Sciences</a>
+                    <a href="industries/public-sector.html" class="dropdown-link">Public Sector & Government</a>
+                    <a href="industries/cloud-providers.html" class="dropdown-link">Cloud & Infrastructure</a>
+                </div>
+            </div>
+            <a href="insights.html" class="nav-link active">Insights</a>
+            <a href="site/index.html" class="nav-link nav-link-highlight">Docs</a>
+            <a href="https://app.lucidcomputing.ai/login" class="nav-link">Log In</a>
+            <a href="index.html#cta" class="nav-link nav-cta-btn">Book a Demo</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="hero-section" class="hero">
+            <!-- Injected via JS -->
+            <div class="loader">Loading latest insight...</div>
+        </section>
+
+        <!-- Filter & Search -->
+        <section class="filter-section">
+            <h2 class="filter-header">All Insights</h2>
+
+            <div class="control-bar">
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search items...">
+                </div>
+                <div class="filter-buttons" id="filter-container">
+                    <button class="filter-btn active" data-tag="all">All</button>
+                    <button class="filter-btn" data-tag="National Security">National Security</button>
+                    <button class="filter-btn" data-tag="AI Security">AI Security</button>
+                    <button class="filter-btn" data-tag="Export Controls">Export Controls</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Posts Grid -->
+        <div id="posts-grid" class="posts-grid">
+            <!-- Injected via JS -->
+            <div class="loader">Loading archive...</div>
+        </div>
+    </div>
+
+    <!-- Jekyll-generated posts data (fallback for Jekyll builds) -->
+    <script id="posts-data" type="application/json">
+    {% assign posts_data = site.data.processed_posts %}
+    {{ posts_data | jsonify }}
+    </script>
+
+    {% raw %}
+    <script>
+        // Fallback posts data for file:// protocol (CORS blocked)
+        const FALLBACK_POSTS = [
+            {
+                title: "Cryptographic Verification: A Strategy for U.S. AI Export Leadership",
+                slug: "cryptographic-verification-a-strategy-for-us-ai-export-leadership",
+                date: "2025-11-03",
+                author: "Kristian Rönn",
+                tags: ["National Security"],
+                image: "media/pE4sNBZQBMDmfBnLeT4iNAVf9V0.png",
+                description: "Turning Sovereign AI Requirements into U.S. Export Opportunities"
+            },
+            {
+                title: "Navigating the Maze of AI and Data Sovereignty in the EU",
+                slug: "navigating-the-maze-of-ai-and-data-sovereignty-in-the-eu",
+                date: "2025-08-29",
+                author: "Connor Dunlop",
+                tags: ["Data Sovereignty"],
+                image: "media/TAgIxThuWHOm5a9n0FTDD5ddk.png",
+                description: "Can hardware-rooted attestation provide a verifiable proof of compliance across EU regulations?"
+            },
+            {
+                title: "AI Exports at Scale Require Verification, Not Just Counting",
+                slug: "ai-exports-at-scale-require-verification-not-just-counting",
+                date: "2025-08-08",
+                author: "Kristian Rönn",
+                tags: ["National Security"],
+                image: "media/wbfAO30etTdjdRF5oESER55KaA.png",
+                description: "To fulfill the promise of the AI Action Plan, export controls must evolve beyond physical counting."
+            },
+            {
+                title: "America First AI Policy in Action",
+                slug: "america-first-ai-policy-in-action",
+                date: "2025-07-15",
+                author: "Kristian Rönn",
+                tags: ["National Security"],
+                image: "media/oole08QnB2huPcp75s2WqGn8uMQ.png",
+                description: "The Congressional roadmap for scaling American AI leadership globally."
+            },
+            {
+                title: "The $16.8 Billion Annual Cost of AI Chip Smuggling",
+                slug: "the-16-8-billion-annual-cost-of-ai-chip-smuggling",
+                date: "2025-06-12",
+                author: "Kristian Rönn",
+                tags: ["National Security"],
+                image: "media/TEthdbacyS4UDO7PWYVxAsLXUlw.jpeg",
+                description: "How Illicit Semiconductor Trade is Draining American Innovation and What Technology Can Do About It"
+            },
+            {
+                title: "Ping-Based Location Verification: 3 Deployment Scenarios",
+                slug: "ping-based-location-verification-3-deployment-scenarios",
+                date: "2025-05-30",
+                author: "Kristian Rönn",
+                tags: ["National Security"],
+                image: "media/srv05vGqYGqH4olrQbiwjvybjw.png",
+                description: "Countering 'Dark Compute' and Illicit Proliferation: A Review of AI Chip Location Verification Methods."
+            },
+            {
+                title: "Security Guarantees in an America First AI Trade Policy",
+                slug: "security-guarantees-in-an-america-first-ai-trade-policy",
+                date: "2025-05-21",
+                author: "Kristian Rönn",
+                tags: ["National Security"],
+                image: "media/9TLw1bo4Wr6uKJLQz8lRX6bp8.jpeg",
+                description: "Balancing bilateral dealmaking, semiconductor competitiveness, and national security in the age of artificial intelligence."
+            }
+        ];
+
+        let allPosts = [];
+
+        async function init() {
+            let data = null;
+
+            try {
+                // Try to load from Jekyll-generated JSON first (if available via Liquid)
+                const postsDataScript = document.getElementById('posts-data');
+
+                if (postsDataScript && postsDataScript.textContent.trim() && !postsDataScript.textContent.includes('{%')) {
+                    // Jekyll processed the Liquid template
+                    data = JSON.parse(postsDataScript.textContent);
+                } else {
+                    // Fallback: fetch JSON file directly (try multiple paths)
+                    let response = null;
+                    const paths = ['data/processed_posts.json', '_data/processed_posts.json'];
+
+                    for (const path of paths) {
+                        try {
+                            response = await fetch(path);
+                            if (response.ok) {
+                                data = await response.json();
+                                break;
+                            }
+                        } catch (e) {
+                            // Try next path
+                            continue;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.warn('Fetch failed, using fallback data:', error);
+            }
+
+            // Use fallback if fetch failed (common with file:// protocol)
+            if (!data || (Array.isArray(data) && data.length === 0)) {
+                data = FALLBACK_POSTS;
+            }
+
+            // Data is already an array
+            allPosts = Array.isArray(data) ? data : (data.posts || []);
+
+            // Sort by date (newest first)
+            allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            renderPage();
+        }
+
+        function renderPage() {
+            if (allPosts.length === 0) return;
+
+            // 1. Render Hero (First Post)
+            const heroPost = allPosts[0]; // Assuming newest first
+            const remainingPosts = allPosts; // We actully want to show ALL in grid too? 
+            // Usually landing page shows highlighted + others. 
+            // Let's show the hero fully, and ALL posts in the grid below for filtering purposes.
+
+            // Or better: Hero is separate, Grid filters everything.
+            // Let's make Hero display the LATEST.
+            renderHero(heroPost);
+
+            // 2. Render Grid
+            renderGrid(allPosts);
+        }
+
+        function renderHero(post) {
+            const heroSection = document.getElementById('hero-section');
+            const tags = post.tags ? post.tags.join(' | ') : 'Update';
+
+            heroSection.innerHTML = `
+                <div class="hero-layout">
+                    <div class="hero-content">
+                        <span class="hero-label">${tags}</span>
+                        <h2 class="hero-title">${post.title}</h2>
+                        <p class="hero-desc">${post.description}</p>
+                        <a href="article.html?slug=${post.slug}" class="btn-outline">Read More &rarr;</a>
+                    </div>
+                    <div class="hero-image-container">
+                        <img src="${post.image}" alt="${post.title}" class="hero-img">
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGrid(posts) {
+            const grid = document.getElementById('posts-grid');
+            if (posts.length === 0) {
+                grid.innerHTML = '<div class="loader">No matching results found.</div>';
+                return;
+            }
+
+            grid.innerHTML = posts.map(post => {
+                const primaryTag = post.tags && post.tags.length > 0 ? post.tags[0] : 'Inisght';
+                return `
+                <a href="article.html?slug=${post.slug}" style="text-decoration: none; color: inherit; cursor: pointer;">
+                    <article class="card">
+                        <div class="card-img-container">
+                            <img src="${post.image}" alt="${post.title}" class="card-img">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-meta">
+                                <span class="card-tag">${primaryTag}</span>
+                                <span>${post.date}</span>
+                            </div>
+                            <h3 class="card-title">${post.title}</h3>
+                            <p class="card-desc">${post.description}</p>
+                        </div>
+                    </article>
+                </a>
+            `}).join('');
+        }
+
+        // --- FILTER & SEARCH LOGIC ---
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        let currentTag = 'all';
+        let currentQuery = '';
+
+        searchInput.addEventListener('input', (e) => {
+            currentQuery = e.target.value.toLowerCase();
+            filterPosts();
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add to clicked
+                btn.classList.add('active');
+
+                currentTag = btn.dataset.tag;
+                filterPosts();
+            });
+        });
+
+        function filterPosts() {
+            const filtered = allPosts.filter(post => {
+                // 1. Tag Match
+                const matchesTag = currentTag === 'all'
+                    ? true
+                    : (post.tags && post.tags.includes(currentTag));
+
+                // 2. Search Match
+                const matchesSearch = post.title.toLowerCase().includes(currentQuery) ||
+                    post.description.toLowerCase().includes(currentQuery);
+
+                return matchesTag && matchesSearch;
+            });
+
+            renderGrid(filtered);
+        }
+
+        // Start
+        document.addEventListener('DOMContentLoaded', init);
+
+        // Mobile Navigation Toggle
+        (function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (!navToggle || !navLinks) return;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'nav-overlay';
+            document.body.appendChild(overlay);
+
+            navToggle.addEventListener('click', function() {
+                const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !isOpen);
+                navLinks.classList.toggle('is-open');
+                overlay.classList.toggle('is-visible');
+                document.body.style.overflow = !isOpen ? 'hidden' : '';
+            });
+
+            overlay.addEventListener('click', function() {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navLinks.classList.remove('is-open');
+                overlay.classList.remove('is-visible');
+                document.body.style.overflow = '';
+            });
+
+            const dropdowns = document.querySelectorAll('.nav-item-dropdown');
+            dropdowns.forEach(function(dropdown) {
+                const link = dropdown.querySelector('.nav-link.has-dropdown');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 968) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('is-open');
+                        }
+                    });
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 968) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navLinks.classList.remove('is-open');
+                    overlay.classList.remove('is-visible');
+                    document.body.style.overflow = '';
+                    dropdowns.forEach(function(d) { d.classList.remove('is-open'); });
+                }
+            });
+
+            navLinks.querySelectorAll('a:not(.has-dropdown)').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 968) {
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navLinks.classList.remove('is-open');
+                        overlay.classList.remove('is-visible');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        })();
+    </script>
+    {% endraw %}
+</body>
+
+</html>
