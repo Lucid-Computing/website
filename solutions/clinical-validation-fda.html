@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Validation Auditor (FDA) - Lucid Computing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .hero-solution {
+            padding: 160px 0 100px;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9));
+            text-align: center;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        @media (max-width: 968px) {
+            .solution-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="page-solution">
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <img src="../lucid-logo.svg" alt="Lucid Computing Logo" class="nav-logo">
+            <div class="nav-text">
+                <span>Lucid</span>
+                <span>Computing</span>
+            </div>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="nav-toggle-icon"></span>
+        </button>
+        <div class="nav-links">
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link has-dropdown">Solutions</a>
+                <div class="dropdown-menu">
+                    <a href="iso-42001-readiness.html" class="dropdown-link">ISO 42001 Readiness</a>
+                    <a href="eu-ai-act-conformity.html" class="dropdown-link">EU AI Act Conformity</a>
+                    <a href="hiring-fairness.html" class="dropdown-link">Hiring Fairness</a>
+                    <a href="clean-data-copyright.html" class="dropdown-link">Clean Data & Copyright</a>
+                    <a href="clinical-validation-fda.html" class="dropdown-link">Clinical Validation (FDA)</a>
+                    <a href="sovereign-shield.html" class="dropdown-link">Sovereign Shield</a>
+                </div>
+            </div>
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link has-dropdown">Industries</a>
+                <div class="dropdown-menu">
+                    <a href="../industries/finance.html" class="dropdown-link">Finance & Banking</a>
+                    <a href="../industries/healthcare.html" class="dropdown-link">Healthcare & Life Sciences</a>
+                    <a href="../industries/public-sector.html" class="dropdown-link">Public Sector & Government</a>
+                    <a href="../industries/cloud-providers.html" class="dropdown-link">Cloud & Infrastructure</a>
+                </div>
+            </div>
+            <a href="../insights.html" class="nav-link">Insights</a>
+            <a href="../site/index.html" class="nav-link nav-link-highlight">Docs</a>
+            <a href="https://app.lucidcomputing.ai/login" class="nav-link">Log In</a>
+            <a href="../index.html#cta" class="nav-link nav-cta-btn">Book a Demo</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-solution">
+        <div class="container">
+            <span class="pill pill-light">Use Case: FDA SaMD Compliance</span>
+            <h1 class="hero-title">Cut <span class="highlight">6 Months</span> Off<br>Your 510(k) Timeline</h1>
+            <p class="subtitle">Automated validation and documentation for AI medical devices. Pre-validate your submission before the FDA does.</p>
+        </div>
+    </section>
+
+    <!-- PAIN STATS SECTION -->
+    <section class="bg-black py-100">
+        <div class="container">
+            <div class="grid-3">
+                <div class="card card-dark text-center">
+                    <div class="stat-val">$6.7M</div>
+                    <div class="stat-label">Cost of Delay</div>
+                    <p class="text-white-50 small">Average lost opportunity cost per delayed FDA clearance</p>
+                </div>
+                <div class="card card-dark text-center">
+                    <div class="stat-val">6-12 months</div>
+                    <div class="stat-label">Rejection Penalty</div>
+                    <p class="text-white-50 small">Additional timeline when submissions fail validation</p>
+                </div>
+                <div class="card card-dark text-center">
+                    <div class="stat-val">$31M</div>
+                    <div class="stat-label">Device Launch Cost</div>
+                    <p class="text-white-50 small">Average cost to bring a medium-complex AI device to market</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section class="bg-black py-120">
+        <div class="container">
+            <div class="solution-grid">
+                <div class="solution-content">
+                    <span class="pill pill-dark">The Approval Bottleneck</span>
+                    <h2>FDA Rejection Burns Cash and Kills Momentum</h2>
+                    <p class="text-white-50">The FDA is tightening requirements for AI/ML-enabled medical devices. Predetermined Change Control Plans. Data lineage documentation. Validation of training data quality. Bias detection. Every rejection forces resubmission, adding 6-12 months to your timeline.</p>
+                    <p class="text-white-50 mt-20">At a $6.7M cost per delay, the traditional approach—scrambling to document after development—is a strategic failure. Regulatory consultants are expensive and slow. Your competitors are shipping while you're stuck in review.</p>
+                </div>
+                <div class="mechanism-card">
+                    <h4>The Lucid Approach</h4>
+                    <h3 class="mt-10">Validation Built Into Development</h3>
+                    <p class="text-white-50 mt-20">Lucid's Clinical Validation Auditor embeds FDA-compliant documentation into your development workflow. Instead of retroactive scrambling, you generate the validation evidence the FDA needs as you build—reducing submission risk and accelerating clearance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION / TECHNICAL MECHANISM -->
+    <section class="bg-gradient py-120">
+        <div class="container">
+            <div class="text-center mb-60">
+                <span class="pill pill-dark">Technical Mechanism</span>
+                <h2>How It Works</h2>
+            </div>
+            <div class="grid-3" style="border: none; gap: 2rem;">
+                <div style="text-align: left; padding: 0 1.5rem;">
+                    <div style="text-align: center;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        <strong style="display: block; margin-bottom: 0.75rem;">PCCP Generation</strong>
+                    </div>
+                    <p class="small text-white-50">Automated creation of Predetermined Change Control Plan documentation showing how your model will be updated post-market.</p>
+                </div>
+                <div style="text-align: left; padding: 0 1.5rem;">
+                    <div style="text-align: center;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                        <strong style="display: block; margin-bottom: 0.75rem;">Data Lineage Tracking</strong>
+                    </div>
+                    <p class="small text-white-50">Complete audit trail of training data sources, preprocessing steps, and validation datasets—with HIPAA-compliant handling.</p>
+                </div>
+                <div style="text-align: left; padding: 0 1.5rem;">
+                    <div style="text-align: center;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <strong style="display: block; margin-bottom: 0.75rem;">GMLP Alignment</strong>
+                    </div>
+                    <p class="small text-white-50">Verification against FDA's Good Machine Learning Practice principles for medical AI development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUE PROOF SECTION -->
+    <section class="bg-black py-120">
+        <div class="container text-center">
+            <span class="pill pill-dark">Proven Results</span>
+            <h2>Value Proof</h2>
+
+            <div class="grid-3 mt-60">
+                <div class="card card-dark">
+                    <div class="stat-val">50%</div>
+                    <div class="stat-label">Submission Time</div>
+                    <p class="text-white-50 small">reduction in 510(k) documentation preparation</p>
+                </div>
+                <div class="card card-dark">
+                    <div class="stat-val">Minimized</div>
+                    <div class="stat-label">Rejection Risk</div>
+                    <p class="text-white-50 small">Pre-validation catches issues before FDA review</p>
+                </div>
+                <div class="card card-dark">
+                    <div class="stat-val">Built-in</div>
+                    <div class="stat-label">HIPAA Compliance</div>
+                    <p class="text-white-50 small">Data lineage tracking without exposing patient PII</p>
+                </div>
+            </div>
+
+            <div class="stats-row is-compliance mt-80">
+                <div class="stat-item">
+                    <div class="stat-val">FDA 510(k)</div>
+                    <div class="stat-label">De Novo</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">GMLP</div>
+                    <div class="stat-label">Good ML Practice</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">HIPAA</div>
+                    <div class="stat-label">Data Privacy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">IEC 62304</div>
+                    <div class="stat-label">Medical Device SW</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section id="cta" class="cta-section py-160">
+        <div class="container">
+            <div class="cta-grid">
+                <div class="cta-left">
+                    <h2 class="cta-title">Accelerate Your <span class="highlight">FDA Clearance</span></h2>
+                    <p class="cta-subtitle">
+                        Stop burning cash on delays. Start shipping with confidence.
+                    </p>
+                </div>
+
+                <div class="form-card">
+                    <form id="contact-form">
+                        <div class="input-group">
+                            <label class="input-label" for="user_name">Name</label>
+                            <input type="text" id="user_name" name="name" class="input-field" placeholder="Full Name"
+                                required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="user_email">Work Email</label>
+                            <input type="email" id="user_email" name="email" class="input-field"
+                                placeholder="name@company.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="message">Project Details</label>
+                            <textarea id="message" name="message" class="input-field" rows="4"
+                                placeholder="Describe your AI medical device and current regulatory status..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submit-btn">Validate Your Submission Package</button>
+                        <div id="form-message" class="form-message" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwev8_veezEgmc6waPr3UAHGIFc1e3o6eROTaHBGKlTJC7-o7SI1qvNQp11VHZZKfEboA/exec";
+
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const form = this;
+            const btn = document.getElementById('submit-btn');
+            const msgDiv = document.getElementById('form-message');
+
+            btn.disabled = true;
+            btn.textContent = "Sending...";
+            msgDiv.style.display = 'none';
+
+            const formData = new URLSearchParams();
+            formData.append('name', document.getElementById('user_name').value);
+            formData.append('email', document.getElementById('user_email').value);
+            formData.append('message', document.getElementById('message').value);
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData.toString()
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === "success") {
+                        msgDiv.className = 'form-message success';
+                        msgDiv.innerHTML = "<strong>Message sent successfully!</strong><br>We've received your request and will be in touch soon.";
+                        msgDiv.style.display = 'block';
+                        form.reset();
+                        btn.style.background = 'var(--c-green)';
+                        setTimeout(() => {
+                            btn.style.background = '';
+                        }, 2000);
+                    } else {
+                        throw new Error(data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    msgDiv.className = 'form-message error';
+                    msgDiv.innerHTML = "<strong>Something went wrong.</strong><br>Please email us directly at <a href='mailto:info@lucidcomputing.ai' style='color: var(--c-red); text-decoration: underline;'>info@lucidcomputing.ai</a>";
+                    msgDiv.style.display = 'block';
+                    msgDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                })
+                .finally(() => {
+                    btn.disabled = false;
+                    btn.textContent = "Validate Your Submission Package";
+                });
+        });
+    </script>
+
+    <!-- Mobile Navigation Script -->
+    <script>
+        (function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (!navToggle || !navLinks) return;
+            const overlay = document.createElement('div');
+            overlay.className = 'nav-overlay';
+            document.body.appendChild(overlay);
+            navToggle.addEventListener('click', function() {
+                const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !isOpen);
+                navLinks.classList.toggle('is-open');
+                overlay.classList.toggle('is-visible');
+                document.body.style.overflow = !isOpen ? 'hidden' : '';
+            });
+            overlay.addEventListener('click', function() {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navLinks.classList.remove('is-open');
+                overlay.classList.remove('is-visible');
+                document.body.style.overflow = '';
+            });
+            const dropdowns = document.querySelectorAll('.nav-item-dropdown');
+            dropdowns.forEach(function(dropdown) {
+                const link = dropdown.querySelector('.nav-link.has-dropdown');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 968) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('is-open');
+                        }
+                    });
+                }
+            });
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 968) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navLinks.classList.remove('is-open');
+                    overlay.classList.remove('is-visible');
+                    document.body.style.overflow = '';
+                    dropdowns.forEach(function(d) { d.classList.remove('is-open'); });
+                }
+            });
+            navLinks.querySelectorAll('a:not(.has-dropdown)').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 968) {
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navLinks.classList.remove('is-open');
+                        overlay.classList.remove('is-visible');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance & Banking - Lucid Computing</title>
+    <!-- Lucid Computing Design System Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .hero-industry {
+            padding: 160px 0 100px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../media/finance-hero.png');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .industry-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+
+<body class="page-industry">
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <img src="../lucid-logo.svg" alt="Lucid Computing Logo" class="nav-logo">
+            <div class="nav-text">
+                <span>Lucid</span>
+                <span>Computing</span>
+            </div>
+        </a>
+        
+        <!-- Hamburger Menu Toggle -->
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="nav-toggle-icon"></span>
+        </button>
+<div class="nav-links">
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link has-dropdown">Solutions</a>
+                <div class="dropdown-menu">
+                    <a href="../solutions/iso-42001-readiness.html" class="dropdown-link">ISO 42001 Readiness</a>
+                    <a href="../solutions/eu-ai-act-conformity.html" class="dropdown-link">EU AI Act Conformity</a>
+                    <a href="../solutions/hiring-fairness.html" class="dropdown-link">Hiring Fairness</a>
+                    <a href="../solutions/clean-data-copyright.html" class="dropdown-link">Clean Data & Copyright</a>
+                    <a href="../solutions/clinical-validation-fda.html" class="dropdown-link">Clinical Validation (FDA)</a>
+                    <a href="../solutions/sovereign-shield.html" class="dropdown-link">Sovereign Shield</a>
+                </div>
+            </div>
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link has-dropdown">Industries</a>
+                <div class="dropdown-menu">
+                    <a href="finance.html" class="dropdown-link">Finance & Banking</a>
+                    <a href="healthcare.html" class="dropdown-link">Healthcare & Life Sciences</a>
+                    <a href="public-sector.html" class="dropdown-link">Public Sector & Government</a>
+                    <a href="cloud-providers.html" class="dropdown-link">Cloud & Infrastructure</a>
+                </div>
+            </div>
+            <a href="../insights.html" class="nav-link">Insights</a>
+            <a href="../site/index.html" class="nav-link nav-link-highlight">Docs</a>
+            <a href="https://app.lucidcomputing.ai/login" class="nav-link">Log In</a>
+            <a href="../index.html#cta" class="nav-link nav-cta-btn">Book a Demo</a>
+        </div>
+    </nav>
+
+    <section class="hero-industry">
+        <div class="container">
+            <span class="pill pill-light">Industry: Finance & Banking</span>
+            <h1 class="hero-title">Protecting the <span class="highlight">Alpha</span> with<br>Confidential Algo-Trading
+            </h1>
+            <p class="subtitle">Secure your proprietary trading algorithms on the public cloud with hardware-enforced
+                integrity.</p>
+        </div>
+    </section>
+
+    <section class="bg-black py-160">
+        <div class="container">
+            <div class="industry-grid">
+                <div>
+                    <span class="pill pill-dark">Strategic Context</span>
+                    <h2>The Alpha Leak</h2>
+                    <p class="text-white-50">In institutional finance, proprietary trading algorithms are the "Crown
+                        Jewels." Moving these workloads to a third-party cloud provider is traditionally a non-starter
+                        due to the risk of IP theft by cloud admins or sophisticated side-channel attacks. This forced
+                        reliance on expensive, slow on-premise infrastructure creates a massive "Inertia Cost."</p>
+                    <p class="text-white-50 mt-20">Lucid enables financial institutions to run their most sensitive
+                        "Alpha" code on high-performance public cloud hardware without ever exposing the logic to the
+                        provider. We replace trust-based SLAs with hardware-rooted cryptographic proof.</p>
+                </div>
+                <div class="mechanism-card">
+                    <h4>The Technical Mechanism</h4>
+                    <div class="check-list mt-30">
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div>
+                                <strong>Blind Processing:</strong>
+                                <p class="small text-white-50">Trading logic and data are only decrypted inside the
+                                    cpu's L3 cache, invisible to the host OS and hypervisor.</p>
+                            </div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div>
+                                <strong>Code Governance:</strong>
+                                <p class="small text-white-50">Hardware-enforced policies ensure that only authorized,
+                                    hashed binaries can access the firm's trading keys.</p>
+                            </div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div>
+                                <strong>Signed Audit Trails:</strong>
+                                <p class="small text-white-50">Provide regulators with immutable, hardware-signed
+                                    evidence of algorithmic compliance without exposing logic.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient py-120">
+        <div class="container text-center">
+            <span class="pill pill-dark">The Lucid Argument</span>
+            <h2>Unlocking the $2T AI Spend</h2>
+            <p class="subtitle">Institutional finance is ready to spend billions on AI, but is blocked by IP risk. Lucid
+                removes the blocker, enabling the capture of the "Sovereignty Premium."</p>
+            <div class="grid-3 mt-60">
+                <div class="card card-dark">
+                    <div class="stat-val">40ms</div>
+                    <div class="stat-label">Verification Latency</div>
+                    <p class="text-white-50 small">End-to-end hardware attestation optimized for high-frequency
+                        environments
+                        without compromising security.</p>
+                </div>
+                <div class="card card-dark">
+                    <div class="stat-val">Zero</div>
+                    <div class="stat-label">Model Exposure</div>
+                    <p class="text-white-50 small">Your proprietary "Alpha" never touches a machine in an unencrypted
+                        state.</p>
+                </div>
+                <div class="card card-dark">
+                    <div class="stat-val">WORM</div>
+                    <div class="stat-label">Immutable Logs</div>
+                    <p class="text-white-50 small">Automate SEC 17a-4(f) and MiFID II RTS 6 reporting with
+                        cryptographically verifiable model integrity evidence.</p>
+                </div>
+            </div>
+
+            <div class="stats-row is-compliance mt-80">
+                <div class="stat-item">
+                    <div class="stat-val">MiFID II</div>
+                    <div class="stat-label">RTS 6 Compliance</div>
+                    <div class="stat-desc">Verifiable algorithmic governance <br>and identity verification.</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">17a-4(f)</div>
+                    <div class="stat-label">SEC WORM</div>
+                    <div class="stat-desc">Cryptographically signed <br>immutable recordkeeping.</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">SOC2</div>
+                    <div class="stat-label">Type II Audit</div>
+                    <div class="stat-desc">Continuous operational <br>security effectiveness.</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">FIPS</div>
+                    <div class="stat-label">140-2 Level 3</div>
+                    <div class="stat-desc">Federal Information <br>Processing Standards.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="cta-section py-160">
+        <div class="container">
+            <div class="cta-grid">
+                <div class="cta-left">
+                    <h2 class="cta-title">Protect Your <span class="highlight">Alpha</span></h2>
+                    <p class="cta-subtitle">
+                        Move to the cloud without sacrificing your proprietary edge. Contact our financial solutions
+                        team.
+                    </p>
+                </div>
+
+                <div class="form-card">
+                    <form id="contact-form">
+                        <div class="input-group">
+                            <label class="input-label" for="user_name">Name</label>
+                            <input type="text" id="user_name" name="name" class="input-field" placeholder="Full Name"
+                                required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="user_email">Work Email</label>
+                            <input type="email" id="user_email" name="email" class="input-field"
+                                placeholder="name@company.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="message">Project Details</label>
+                            <textarea id="message" name="message" class="input-field" rows="4"
+                                placeholder="Tell us about your infrastructure needs..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submit-btn">Request Access</button>
+                        <div id="form-message" class="form-message" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwev8_veezEgmc6waPr3UAHGIFc1e3o6eROTaHBGKlTJC7-o7SI1qvNQp11VHZZKfEboA/exec";
+
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const form = this;
+            const btn = document.getElementById('submit-btn');
+            const msgDiv = document.getElementById('form-message');
+
+            btn.disabled = true;
+            btn.textContent = "Sending...";
+            msgDiv.style.display = 'none';
+
+            const formData = new URLSearchParams();
+            formData.append('name', document.getElementById('user_name').value);
+            formData.append('email', document.getElementById('user_email').value);
+            formData.append('message', document.getElementById('message').value);
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData.toString()
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === "success") {
+                        msgDiv.className = 'form-message success';
+                        msgDiv.innerHTML = "<strong>Message sent successfully!</strong><br>We've received your request and will be in touch soon.";
+                        msgDiv.style.display = 'block';
+                        form.reset();
+                        btn.style.background = 'var(--c-green)';
+                        setTimeout(() => {
+                            btn.style.background = '';
+                        }, 2000);
+                    } else {
+                        throw new Error(data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    msgDiv.className = 'form-message error';
+                    msgDiv.innerHTML = "<strong>Something went wrong.</strong><br>Please email us directly at <a href='mailto:info@lucidcomputing.ai' style='color: var(--c-red); text-decoration: underline;'>info@lucidcomputing.ai</a>";
+                    msgDiv.style.display = 'block';
+                    msgDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                })
+                .finally(() => {
+                    btn.disabled = false;
+                    btn.textContent = "Request Access";
+                });
+        });
+    </script>
+
+
+    <!-- Mobile Navigation Script -->
+    <script>
+        (function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (!navToggle || !navLinks) return;
+            const overlay = document.createElement('div');
+            overlay.className = 'nav-overlay';
+            document.body.appendChild(overlay);
+            navToggle.addEventListener('click', function() {
+                const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !isOpen);
+                navLinks.classList.toggle('is-open');
+                overlay.classList.toggle('is-visible');
+                document.body.style.overflow = !isOpen ? 'hidden' : '';
+            });
+            overlay.addEventListener('click', function() {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navLinks.classList.remove('is-open');
+                overlay.classList.remove('is-visible');
+                document.body.style.overflow = '';
+            });
+            const dropdowns = document.querySelectorAll('.nav-item-dropdown');
+            dropdowns.forEach(function(dropdown) {
+                const link = dropdown.querySelector('.nav-link.has-dropdown');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 968) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('is-open');
+                        }
+                    });
+                }
+            });
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 968) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navLinks.classList.remove('is-open');
+                    overlay.classList.remove('is-visible');
+                    document.body.style.overflow = '';
+                    dropdowns.forEach(function(d) { d.classList.remove('is-open'); });
+                }
+            });
+            navLinks.querySelectorAll('a:not(.has-dropdown)').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 968) {
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navLinks.classList.remove('is-open');
+                        overlay.classList.remove('is-visible');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
