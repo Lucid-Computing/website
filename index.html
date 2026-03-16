@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucid Computing - Supercharge Your Army of Agents</title>
+    <!-- Lucid Computing Design System Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Space Mono: Headings, code, technical text -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- Inter: Body text, UI elements -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Space Grotesk: Accent/display text -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Super Cheap — Pricing Comparison */
+        .pricing-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 0;
+        }
+        .pricing-tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--c-neutral-700, #232323);
+            border: 1px solid var(--c-neutral-600, #373737);
+            border-bottom: none;
+            color: var(--c-neutral-400, #bbbcbf);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .pricing-tab:first-child { border-right: none; }
+        .pricing-tab.active {
+            background: var(--c-neutral-800, #111111);
+            color: var(--c-brand, #f8d648);
+            border-bottom: 2px solid var(--c-brand, #f8d648);
+        }
+        .pricing-tab svg { opacity: 0.5; transition: opacity 0.2s; }
+        .pricing-tab.active svg { opacity: 1; stroke: var(--c-brand, #f8d648); }
+        .pricing-slide {
+            display: none;
+            background: var(--c-neutral-700, #232323);
+            border: 1px solid var(--c-neutral-600, #373737);
+            border-top: none;
+            padding: 2rem;
+        }
+        .pricing-slide.active { display: block; }
+        .pricing-tier-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .pricing-tier-header h3 {
+            margin: 0;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.25rem;
+        }
+        .pricing-tier-desc {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+        .pricing-table-wrap { overflow-x: auto; }
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+        .pricing-table th,
+        .pricing-table td {
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--c-neutral-600, #373737);
+        }
+        .pricing-table th:first-child,
+        .pricing-table td:first-child { text-align: left; }
+        .pricing-table thead th {
+            border-bottom: 2px solid var(--c-neutral-600, #373737);
+            padding-bottom: 1rem;
+        }
+        .pricing-highlight-col { background: rgba(248, 214, 72, 0.05); }
+        .pricing-model-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+        }
+        .pricing-model-badge.lucid {
+            background: var(--c-brand, #f8d648);
+            color: #111;
+        }
+        .pricing-model-badge.proprietary {
+            background: var(--c-neutral-600, #373737);
+            color: var(--c-neutral-400, #bbbcbf);
+        }
+        .pricing-provider {
+            display: block;
+            font-size: 0.65rem;
+            opacity: 0.5;
+            margin-top: 0.3rem;
+        }
+        .pricing-label {
+            font-size: 0.8rem;
+            color: var(--c-neutral-400, #bbbcbf);
+        }
+        .pricing-unit {
+            font-size: 0.65rem;
+            opacity: 0.6;
+        }
+        .pricing-savings {
+            color: var(--c-brand, #f8d648);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .pricing-savings-row td { border-bottom: none; }
+        .pricing-callout {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--c-neutral-700, #232323);
+            border-left: 3px solid var(--c-brand, #f8d648);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .pricing-callout-icon { flex-shrink: 0; margin-top: 0.15rem; }
+
+        /* Agent Builder Product Screen */
+        .agent-builder-screen {
+            border: 1px solid var(--c-neutral-600, #373737);
+            background: var(--c-neutral-800, #111111);
+            overflow: hidden;
+        }
+        .agent-builder-wrapper {
+            display: flex;
+            min-height: 420px;
+        }
+        .ab-sidebar {
+            width: 52px;
+            background: var(--c-neutral-800, #111111);
+            border-right: 1px solid var(--c-neutral-600, #373737);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.75rem 0;
+            flex-shrink: 0;
+        }
+        .ab-sidebar-logo { margin-bottom: 1.25rem; }
+        .ab-sidebar-logo img { width: 24px; height: 24px; }
+        .ab-sidebar-nav { display: flex; flex-direction: column; gap: 0.25rem; }
+        .ab-nav-item {
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--c-neutral-500, #727272);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .ab-nav-item.active { color: var(--c-brand, #f8d648); }
+        .ab-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+        .ab-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid var(--c-neutral-600, #373737);
+        }
+        .ab-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem; font-weight: 700; margin: 0;
+        }
+        .ab-header-actions { display: flex; align-items: center; gap: 1rem; }
+        .ab-status {
+            display: flex; align-items: center; gap: 0.4rem;
+            font-size: 0.75rem; color: var(--c-neutral-400, #bbbcbf);
+        }
+        .ab-deploy-btn {
+            background: var(--c-brand, #f8d648); color: #111;
+            border: none; padding: 0.4rem 1rem;
+            font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700;
+            cursor: pointer;
+        }
+        .ab-content { padding: 1.5rem; }
+        .ab-section { margin-bottom: 1.75rem; }
+        .ab-section:last-child { margin-bottom: 0; }
+        .ab-section-label {
+            display: flex; align-items: center; gap: 0.6rem;
+            font-family: 'Space Mono', monospace; font-size: 0.8rem;
+            color: var(--c-neutral-400, #bbbcbf);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .ab-step {
+            width: 22px; height: 22px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--c-neutral-600, #373737);
+            font-size: 0.7rem; font-weight: 700;
+            color: var(--c-neutral-300, #f2f2f2);
+        }
+
+        /* Role cards */
+        .ab-role-grid {
+            display: flex; gap: 0.6rem; flex-wrap: nowrap;
+        }
+        .ab-role-card {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 0.25rem; padding: 1rem 1.25rem;
+            background: var(--c-neutral-700, #232323);
+            border: 1px solid var(--c-neutral-600, #373737);
+            flex: 1 1 0; min-width: 0; cursor: pointer;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .ab-role-card.selected {
+            border-color: var(--c-brand, #f8d648);
+            background: rgba(248, 214, 72, 0.06);
+        }
+        .ab-role-icon { font-size: 1.5rem; color: var(--c-neutral-400, #bbbcbf); }
+        .ab-role-card.selected .ab-role-icon { color: var(--c-brand, #f8d648); }
+        .ab-role-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem; font-weight: 600;
+        }
+        .ab-role-desc {
+            font-size: 0.65rem; opacity: 0.5; text-align: center;
+        }
+
+        /* Integration chips */
+        .ab-integration-grid {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+        }
+        .ab-int-chip {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            border: 1px solid var(--c-neutral-600, #373737);
+            border-radius: 999px;
+            font-family: 'Inter', sans-serif; font-size: 0.75rem;
+            color: var(--c-neutral-400, #bbbcbf);
+            background: var(--c-neutral-700, #232323);
+            cursor: pointer; transition: border-color 0.15s, color 0.15s;
+        }
+        .ab-int-chip i { font-size: 0.9rem; }
+        .ab-int-chip.active {
+            border-color: var(--c-brand, #f8d648);
+            color: var(--c-neutral-100, #ffffff);
+        }
+        .ab-int-chip.active i { color: var(--c-brand, #f8d648); }
+        .ab-int-more {
+            border-style: dashed;
+            color: var(--c-neutral-500, #727272);
+        }
+
+        /* Model selector */
+        .ab-model-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+        .ab-model-option {
+            padding: 0.75rem 1.25rem;
+            background: var(--c-neutral-700, #232323);
+            border: 1px solid var(--c-neutral-600, #373737);
+            cursor: pointer;
+            transition: border-color 0.15s;
+        }
+        .ab-model-option.selected {
+            border-color: var(--c-brand, #f8d648);
+            background: rgba(248, 214, 72, 0.06);
+        }
+        .ab-model-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem; font-weight: 700;
+        }
+        .ab-model-meta {
+            font-size: 0.65rem; opacity: 0.5; margin-top: 0.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .agent-builder-wrapper { flex-direction: column; }
+            .ab-sidebar {
+                width: 100%; flex-direction: row;
+                border-right: none; border-bottom: 1px solid var(--c-neutral-600, #373737);
+                padding: 0.5rem 0.75rem;
+            }
+            .ab-sidebar-logo { margin-bottom: 0; margin-right: 0.75rem; }
+            .ab-sidebar-nav { flex-direction: row; }
+            .ab-role-grid { overflow-x: auto; flex-wrap: nowrap; }
+            .ab-role-card { min-width: 100px; flex-shrink: 0; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="marketplace-data.js"></script>
+    <script src="marketplace.js"></script>
+    <script src="animation.js"></script>
+</head>
+
+<body class="page-home">
+    <nav class="navbar">
+        <a href="#hero" class="nav-brand">
+            <img src="lucid-logo.svg" alt="Lucid Computing Logo" class="nav-logo">
+            <div class="nav-text">
+                <span>Lucid</span>
+                <span>Computing</span>
+            </div>
+        </a>
+
+        <!-- Hamburger Menu Toggle -->
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="nav-toggle-icon"></span>
+        </button>
+
+        <div class="nav-links">
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link has-dropdown">Solutions</a>
+                <div class="dropdown-menu">
+                    <a href="solutions/iso-42001-readiness.html" class="dropdown-link">ISO 42001 Readiness</a>
+                    <a href="solutions/eu-ai-act-conformity.html" class="dropdown-link">EU AI Act Conformity</a>
+                    <a href="solutions/hiring-fairness.html" class="dropdown-link">Hiring Fairness</a>
+                    <a href="solutions/clean-data-copyright.html" class="dropdown-link">Clean Data & Copyright</a>
+                    <a href="solutions/clinical-validation-fda.html" class="dropdown-link">Clinical Validation (FDA)</a>
+                    <a href="solutions/sovereign-shield.html" class="dropdown-link">Sovereign Shield</a>
+                </div>
+            </div>
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link has-dropdown">Industries</a>
+                <div class="dropdown-menu">
+                    <a href="industries/finance.html" class="dropdown-link">Finance & Banking</a>
+                    <a href="industries/healthcare.html" class="dropdown-link">Healthcare & Life Sciences</a>
+                    <a href="industries/public-sector.html" class="dropdown-link">Public Sector & Government</a>
+                    <a href="industries/cloud-providers.html" class="dropdown-link">Cloud & Infrastructure</a>
+                </div>
+            </div>
+            <a href="insights.html" class="nav-link">Insights</a>
+            <a href="site/index.html" class="nav-link nav-link-highlight">Docs</a>
+            <a href="https://app.lucidcomputing.ai/login" class="nav-link">Log In</a>
+            <a href="#cta" class="nav-link nav-cta-btn">Book a Demo</a>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         SECTION 1: HERO
+         ============================================ -->
+    <section id="hero" class="bg-black">
+        <div id="hero-animation"></div>
+        <div class="hero-container">
+            <div class="hero-content animate-up delay-1">
+                <h1 class="hero-title">
+                    <span class="hero-title-main">Supercharge Your<br>Army of Agents</span>
+                    <span class="hero-title-suffix" id="rotator-suffix">Securely</span>
+                </h1>
+                <p class="subtitle">
+                    An engineer, a researcher, a legal analyst, a sales rep, and a personal assistant. Running on models you own and control, encrypted in hardware nobody can open. Not even us.
+                </p>
+                <div class="hero-btns">
+                    <a href="#cta" class="btn-white-hero">
+                        Get Started
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PILLAR SECTIONS — connected by vertical accent line
+         ============================================ -->
+    <div class="line-alignment-wrapper" style="position: relative;">
+        <div style="position: absolute; top: 0; bottom: 0; left: max(2rem, calc(50% - 700px)); width: 1px; background: #f8d648; z-index: 9999; pointer-events: none;"></div>
+
+    <!-- ============================================
+         SECTION 2: SUPER PRODUCTIVE
+         ============================================ -->
+    <section id="productive" class="bg-black">
+        <div class="container text-left">
+            <div class="section-header animate-up">
+                <span class="pill pill-dark">SUPER PRODUCTIVE</span>
+                <h2 style="margin-top: 1rem;">One Platform. Many Roles. 24/7.</h2>
+            </div>
+
+            <div class="grid-33-66 mt-20">
+                <!-- Left Panel: Check Items -->
+                <div class="animate-up delay-2" style="text-align: left;">
+                    <div class="check-item">
+                        <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <div>
+                            <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Many Roles, One Agent</h4>
+                            <p style="font-size: 0.95rem; opacity: 0.8;">Engineer, researcher, legal analyst, sales rep, and personal assistant. Pick a role, connect your tools, and deploy in 60 seconds.</p>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        <div>
+                            <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">50+ Integrations</h4>
+                            <p style="font-size: 0.95rem; opacity: 0.8;">GitHub, Slack, Gmail, Telegram, WhatsApp, Discord, Obsidian, Calendar, Browser, Shell, and dozens more. Your agent lives where you already work.</p>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/>
+                            <line x1="9" y1="21" x2="15" y2="21"/>
+                        </svg>
+                        <div>
+                            <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Persistent Memory</h4>
+                            <p style="font-size: 0.95rem; opacity: 0.8;">Your agent remembers everything across sessions—your codebase, your preferences, your workflows. It gets smarter the more you use it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Agent Builder Product Screen -->
+                <div class="animate-up delay-2">
+                    <div class="agent-builder-screen">
+                        <div class="agent-builder-wrapper">
+                            <!-- Sidebar -->
+                            <aside class="ab-sidebar">
+                                <div class="ab-sidebar-logo">
+                                    <img src="lucid-logo.svg" alt="Lucid" class="canvas-logo-img">
+                                </div>
+                                <nav class="ab-sidebar-nav">
+                                    <a href="#" class="ab-nav-item active" title="Agents">
+                                        <i class="ph ph-robot"></i>
+                                    </a>
+                                    <a href="#" class="ab-nav-item" title="Integrations">
+                                        <i class="ph ph-plugs-connected"></i>
+                                    </a>
+                                    <a href="#" class="ab-nav-item" title="Logs">
+                                        <i class="ph ph-list-dashes"></i>
+                                    </a>
+                                    <a href="#" class="ab-nav-item" title="Settings">
+                                        <i class="ph ph-gear"></i>
+                                    </a>
+                                </nav>
+                            </aside>
+
+                            <!-- Main Content -->
+                            <main class="ab-main">
+                                <header class="ab-header">
+                                    <h3 class="ab-title">New Agent</h3>
+                                    <div class="ab-header-actions">
+                                        <span class="ab-status"><span class="status-dot status-active"></span> Draft</span>
+                                        <button class="ab-deploy-btn">Deploy Agent &rarr;</button>
+                                    </div>
+                                </header>
+
+                                <div class="ab-content">
+                                    <!-- Step 1: Choose Role -->
+                                    <div class="ab-section">
+                                        <div class="ab-section-label">
+                                            <span class="ab-step">1</span>
+                                            Choose a Role
+                                        </div>
+                                        <div class="ab-role-grid">
+                                            <div class="ab-role-card selected">
+                                                <i class="ph ph-code ab-role-icon"></i>
+                                                <span class="ab-role-name">Engineer</span>
+                                                <span class="ab-role-desc">Code, PRs, CI/CD</span>
+                                            </div>
+                                            <div class="ab-role-card">
+                                                <i class="ph ph-magnifying-glass ab-role-icon"></i>
+                                                <span class="ab-role-name">Researcher</span>
+                                                <span class="ab-role-desc">Web, reports, data</span>
+                                            </div>
+                                            <div class="ab-role-card">
+                                                <i class="ph ph-scales ab-role-icon"></i>
+                                                <span class="ab-role-name">Legal</span>
+                                                <span class="ab-role-desc">Contracts, NDAs, risk</span>
+                                            </div>
+                                            <div class="ab-role-card">
+                                                <i class="ph ph-megaphone ab-role-icon"></i>
+                                                <span class="ab-role-name">Sales</span>
+                                                <span class="ab-role-desc">Outreach, CRM, leads</span>
+                                            </div>
+                                            <div class="ab-role-card">
+                                                <i class="ph ph-calendar-check ab-role-icon"></i>
+                                                <span class="ab-role-name">Assistant</span>
+                                                <span class="ab-role-desc">Email, calendar, Slack</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 2: Connect Integrations -->
+                                    <div class="ab-section">
+                                        <div class="ab-section-label">
+                                            <span class="ab-step">2</span>
+                                            Connect Integrations
+                                        </div>
+                                        <div class="ab-integration-grid">
+                                            <div class="ab-int-chip active"><i class="ph ph-github-logo"></i> GitHub</div>
+                                            <div class="ab-int-chip active"><i class="ph ph-slack-logo"></i> Slack</div>
+                                            <div class="ab-int-chip active"><i class="ph ph-envelope-simple"></i> Gmail</div>
+                                            <div class="ab-int-chip"><i class="ph ph-trello-logo"></i> Trello</div>
+                                            <div class="ab-int-chip"><i class="ph ph-discord-logo"></i> Discord</div>
+                                            <div class="ab-int-chip"><i class="ph ph-telegram-logo"></i> Telegram</div>
+                                            <div class="ab-int-chip"><i class="ph ph-whatsapp-logo"></i> WhatsApp</div>
+                                            <div class="ab-int-chip"><i class="ph ph-browser"></i> Browser</div>
+                                            <div class="ab-int-chip"><i class="ph ph-terminal"></i> Shell</div>
+                                            <div class="ab-int-chip"><i class="ph ph-note"></i> Obsidian</div>
+                                            <div class="ab-int-chip"><i class="ph ph-calendar"></i> Calendar</div>
+                                            <div class="ab-int-chip ab-int-more">+38 more</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 3: Choose Model -->
+                                    <div class="ab-section">
+                                        <div class="ab-section-label">
+                                            <span class="ab-step">3</span>
+                                            Choose a Model
+                                        </div>
+                                        <div class="ab-model-row">
+                                            <div class="ab-model-option selected">
+                                                <div class="ab-model-name">Kimi K2.5</div>
+                                                <div class="ab-model-meta">Thinking &middot; 1T params</div>
+                                            </div>
+                                            <div class="ab-model-option">
+                                                <div class="ab-model-name">GLM-4.7-Flash</div>
+                                                <div class="ab-model-meta">Fast &middot; Low latency</div>
+                                            </div>
+                                            <div class="ab-model-option">
+                                                <div class="ab-model-name">Llama 4 Scout</div>
+                                                <div class="ab-model-meta">Balanced &middot; 109B</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF SECTION - HIDDEN PENDING PERMISSIONS
+    <section id="social-proof" class="bg-black">
+        <div class="container">
+            <p class="social-proof-text">Advancing safe AI futures together with</p>
+            <div class="logo-carousel-wrapper">
+                <div class="logo-carousel-track" id="logo-carousel-track">
+                    <div class="logo-item"><img src="logos/nvidia.png" alt="NVIDIA"></div>
+                    <div class="logo-item"><img src="logos/ocp.png" alt="Open Compute Project"></div>
+                    <div class="logo-item"><img src="logos/fathom.svg" alt="Fathom"></div>
+                    <div class="logo-item"><img src="logos/aiuc.svg" alt="AIUC"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- ============================================
+         SECTION 3: AUDIT CHAIN
+         ============================================ -->
+        <section id="auditors" class="bg-black">
+            <div class="container text-left">
+                <div class="section-header animate-up">
+                    <span class="pill pill-dark">SUPER SECURE</span>
+                    <h2 style="margin-top: 1rem;">Plug-and-Play Compliance for Every Agent</h2>
+                </div>
+
+                <div class="grid-33-66 mt-20">
+                    <!-- Left Panel: Check Items -->
+                    <div class="animate-up delay-2" style="text-align: left;">
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                </path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">MCP & AgentGateway Native</h4>
+                                <p style="font-size: 0.95rem; opacity: 0.8;">Every agent tool call passes through AgentGateway guardrails built on the open MCP standard. Inspect, enforce, and audit every action before it executes.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="4 17 10 11 4 5"></polyline>
+                                <line x1="12" y1="19" x2="20" y2="19"></line>
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Drag-and-Drop Policy Editor</h4>
+                                <p style="font-size: 0.95rem; opacity: 0.8;">Build audit chains visually. Drag compliance modules—GDPR, HIPAA, EU AI Act—into a chain and deploy them across your entire fleet of agents. No code required.</p>
+                            </div>
+                        </div>
+
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Plug-and-Play Compliance</h4>
+                                <p style="font-size: 0.95rem; opacity: 0.8;">Pull pre-built compliance modules from the marketplace. Deploy as lightweight sidecars—no changes to your existing models or pipelines. One click and your agents are protected.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Drag-Drop Canvas -->
+                    <div class="animate-up delay-2">
+                        <div class="canvas-editor">
+                            <div class="canvas-wrapper">
+                                <!-- Mini Sidebar -->
+                                <aside class="canvas-sidebar">
+                                    <div class="canvas-sidebar-logo">
+                                        <img src="lucid-logo.svg" alt="Lucid" class="canvas-logo-img">
+                                    </div>
+                                    <nav class="canvas-sidebar-nav">
+                                        <a href="#" class="canvas-nav-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <line x1="18" y1="20" x2="18" y2="10" />
+                                                <line x1="12" y1="20" x2="12" y2="4" />
+                                                <line x1="6" y1="20" x2="6" y2="14" />
+                                            </svg>
+                                        </a>
+                                        <a href="#" class="canvas-nav-item active">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                            </svg>
+                                        </a>
+                                        <a href="#" class="canvas-nav-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                            </svg>
+                                        </a>
+                                        <a href="#" class="canvas-nav-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                <polyline points="14 2 14 8 20 8" />
+                                            </svg>
+                                        </a>
+                                    </nav>
+                                </aside>
+                                <!-- Canvas Area -->
+                                <div class="canvas-area">
+                                    <div class="canvas-header">
+                                        <span class="canvas-title">Audit Chain Builder</span>
+                                        <div class="canvas-actions">
+                                            <span class="canvas-status">
+                                                <span class="status-dot status-active"></span>
+                                                Live
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="canvas-grid">
+                                        <!-- Auditor Nodes with Connections -->
+                                        <div class="canvas-node-group">
+                                            <!-- Sovereignty Auditor -->
+                                            <div class="canvas-node sovereignty">
+                                                <div class="node-icon-wrap">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <circle cx="12" cy="12" r="10"/>
+                                                        <line x1="2" y1="12" x2="22" y2="12"/>
+                                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="node-label">Sovereignty</span>
+                                                <span class="node-version">v2.1</span>
+                                            </div>
+                                            <!-- Connection Arrow -->
+                                            <div class="canvas-connector">
+                                                <svg width="40" height="20" viewBox="0 0 40 20">
+                                                    <line x1="0" y1="10" x2="32" y2="10" stroke="var(--c-brand)" stroke-width="2"/>
+                                                    <polygon points="32,5 40,10 32,15" fill="var(--c-brand)"/>
+                                                </svg>
+                                            </div>
+                                            <!-- GDPR Auditor -->
+                                            <div class="canvas-node gdpr">
+                                                <div class="node-icon-wrap">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="node-label">GDPR</span>
+                                                <span class="node-version">v3.0</span>
+                                            </div>
+                                            <!-- Connection Arrow -->
+                                            <div class="canvas-connector">
+                                                <svg width="40" height="20" viewBox="0 0 40 20">
+                                                    <line x1="0" y1="10" x2="32" y2="10" stroke="var(--c-brand)" stroke-width="2"/>
+                                                    <polygon points="32,5 40,10 32,15" fill="var(--c-brand)"/>
+                                                </svg>
+                                            </div>
+                                            <!-- EU AI Act Auditor -->
+                                            <div class="canvas-node eu-ai-act">
+                                                <div class="node-icon-wrap">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                                        <polyline points="14 2 14 8 20 8"/>
+                                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                                    </svg>
+                                                </div>
+                                                <span class="node-label">EU AI Act</span>
+                                                <span class="node-version">v1.2</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="canvas-footer">
+                                        <span class="canvas-hint">Drag auditors from the marketplace to build your chain</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- closing container -->
+        </section>
+
+        <!-- SECTION 4: UNIFIED COMMAND -->
+        <section id="observability" class="bg-black">
+            <div class="container text-left">
+                <div class="section-header animate-up">
+                    <span class="pill pill-dark">SUPER OBSERVABLE</span>
+                    <h2 style="margin-top: 1rem;">One Dashboard. Every Agent. Total Authority.</h2>
+                </div>
+
+                <div class="grid-33-66 mt-20">
+                    <!-- Left Panel: Check Items -->
+                    <div class="animate-up delay-2" style="text-align: left;">
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Emergency Agent Control</h4>
+                                <p style="font-size: 0.95rem; opacity: 0.8;">Instantly revoke any agent's access with a single click. When an agent behaves unexpectedly, halt it immediately—no code changes required.</p>
+                            </div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Human-in-the-Loop</h4>
+                                <p style="font-size: 0.95rem; opacity: 0.8;">Route high-risk decisions to human reviewers before they execute. Configurable thresholds let you balance speed with oversight.</p>
+                            </div>
+                        </div>
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Complete Audit Logging</h4>
+                                <p style="font-size: 0.95rem; opacity: 0.8;">Every agent action, every inference, every decision—logged and searchable. Build the audit trail regulators demand.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Dashboard -->
+                    <div class="animate-up delay-2">
+                    <div class="dashboard-wrapper dashboard-lite">
+                        <!-- Sidebar (icon-only) -->
+                        <aside class="canvas-sidebar">
+                            <div class="canvas-sidebar-logo">
+                                <img src="lucid-logo.svg" alt="Lucid" class="canvas-logo-img">
+                            </div>
+                            <nav class="canvas-sidebar-nav">
+                                <a href="#" class="canvas-nav-item active">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="18" y1="20" x2="18" y2="10" />
+                                        <line x1="12" y1="20" x2="12" y2="4" />
+                                        <line x1="6" y1="20" x2="6" y2="14" />
+                                    </svg>
+                                </a>
+                                <a href="#" class="canvas-nav-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                    </svg>
+                                </a>
+                                <a href="#" class="canvas-nav-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                    </svg>
+                                </a>
+                                <a href="#" class="canvas-nav-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                    </svg>
+                                </a>
+                                <a href="#" class="canvas-nav-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                        <polyline points="14 2 14 8 20 8" />
+                                    </svg>
+                                </a>
+                            </nav>
+                        </aside>
+
+                        <!-- Main Content -->
+                        <main class="dashboard-main">
+                            <header class="dashboard-header">
+                                <div class="header-top">
+                                    <h3 class="dash-title">Analytics</h3>
+                                    <div class="dash-tabs">
+                                        <button class="dash-tab active">Overview</button>
+                                        <button class="dash-tab">Agents</button>
+                                        <button class="dash-tab">Policies</button>
+                                    </div>
+                                </div>
+
+                                <div class="header-filters">
+                                    <div class="search-bar">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                        </svg>
+                                        <input type="text" placeholder="Search filters...">
+                                    </div>
+                                    <div class="date-picker">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                            <line x1="16" y1="2" x2="16" y2="6" />
+                                            <line x1="8" y1="2" x2="8" y2="6" />
+                                            <line x1="3" y1="10" x2="21" y2="10" />
+                                        </svg>
+                                        <span>2024-12-01 - 2024-12-28</span>
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="m6 9 6 6 6-6" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </header>
+
+                            <div class="dashboard-grid">
+                                <!-- Stats Row -->
+                                <div class="dash-card stat-card">
+                                    <div class="card-label">Total Verifications</div>
+                                    <div class="card-value">124,852 <span class="trend-up">+12.4%</span></div>
+                                    <div class="card-chart-mini">
+                                        <div class="bar-mini" style="height: 40%"></div>
+                                        <div class="bar-mini" style="height: 60%"></div>
+                                        <div class="bar-mini" style="height: 50%"></div>
+                                        <div class="bar-mini" style="height: 80%"></div>
+                                        <div class="bar-mini" style="height: 70%"></div>
+                                        <div class="bar-mini" style="height: 90%"></div>
+                                    </div>
+                                </div>
+                                <div class="dash-card stat-card">
+                                    <div class="card-label">Average Latency</div>
+                                    <div class="card-value">142ms <span class="trend-down">+0.34%</span></div>
+                                    <div class="card-chart-mini">
+                                        <svg width="100%" height="40" viewBox="0 0 100 40">
+                                            <path d="M0,35 Q20,10 40,25 T80,15 T100,20" fill="none"
+                                                stroke="var(--c-yellow)" stroke-width="2" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="dash-card stat-card">
+                                    <div class="card-label">Trust Score</div>
+                                    <div class="card-value">99.43% <span class="trend-up">+1.24%</span></div>
+                                    <div class="card-chart-mini">
+                                        <div class="heart-pulse"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Map Section (Spans 2 columns) -->
+                                <div class="dash-card span-2 map-card">
+                                    <div class="card-header">
+                                        <span class="card-title">Global Agent Distribution</span>
+                                        <div class="card-actions-mini">
+                                            <span class="status-indicator live"></span>
+                                            <span class="status-text">LIVE</span>
+                                        </div>
+                                    </div>
+                                    <div class="map-viz-container">
+                                        <img src="world_map.svg" alt="World Map" class="world-map-img">
+                                        <!-- Agent Dots -->
+                                        <div class="map-dot" style="top: 35%; left: 22%;" data-label="US-EAST-1"></div>
+                                        <div class="map-dot" style="top: 32%; left: 48%;" data-label="EU-NORTH-1"></div>
+                                        <div class="map-dot" style="top: 65%; left: 78%;" data-label="AU-SYD-2"></div>
+                                        <div class="map-dot" style="top: 42%; left: 72%;" data-label="ASIA-SOUTH-1">
+                                        </div>
+                                        <div class="map-dot" style="top: 55%; left: 32%;" data-label="SA-EAST-1"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Histogram Section (Refusals by Auditor) -->
+                                <div class="dash-card histogram-card">
+                                    <div class="card-header">
+                                        <span class="card-title">Refusals by Auditor</span>
+                                    </div>
+                                    <div class="histogram-container">
+                                        <div class="histogram-item">
+                                            <div class="hist-label">PII Auditor</div>
+                                            <div class="hist-bar-wrapper">
+                                                <div class="hist-bar" style="width: 85%; background: var(--c-red);">
+                                                </div>
+                                                <span class="hist-val">124</span>
+                                            </div>
+                                        </div>
+                                        <div class="histogram-item">
+                                            <div class="hist-label">Toxicity Auditor</div>
+                                            <div class="hist-bar-wrapper">
+                                                <div class="hist-bar" style="width: 45%; background: var(--c-yellow);">
+                                                </div>
+                                                <span class="hist-val">68</span>
+                                            </div>
+                                        </div>
+                                        <div class="histogram-item">
+                                            <div class="hist-label">Fairness Auditor</div>
+                                            <div class="hist-bar-wrapper">
+                                                <div class="hist-bar" style="width: 30%; background: var(--c-yellow);">
+                                                </div>
+                                                <span class="hist-val">42</span>
+                                            </div>
+                                        </div>
+                                        <div class="histogram-item">
+                                            <div class="hist-label">Injection Auditor</div>
+                                            <div class="hist-bar-wrapper">
+                                                <div class="hist-bar" style="width: 92%; background: var(--c-red);">
+                                                </div>
+                                                <span class="hist-val">148</span>
+                                            </div>
+                                        </div>
+                                        <div class="histogram-item">
+                                            <div class="hist-label">RAG Auditor</div>
+                                            <div class="hist-bar-wrapper">
+                                                <div class="hist-bar" style="width: 15%; background: var(--c-green);">
+                                                </div>
+                                                <span class="hist-val">12</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+                </div> <!-- closing grid-33-66 -->
+            </div> <!-- closing container -->
+
+        </section>
+
+
+        <!-- SECTION 5: PROVE IT -->
+        <section id="passports" class="bg-black">
+            <div class="container text-left">
+                <div class="section-header animate-up">
+                    <span class="pill pill-dark">SUPER TRUSTWORTHY</span>
+                    <h2 style="margin-top: 1rem;">AI Passports Your Customers Can Verify</h2>
+                </div>
+                <div class="grid-33-66">
+                    <!-- Left Panel -->
+                    <div class="animate-up delay-1" style="text-align: left;">
+
+                        <div class="check-item mt-40">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <path d="M12 18v-6"></path>
+                                <circle cx="12" cy="18" r="1"></circle>
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">AI Passports for Every Interaction</h4>
+                                <p style="font-size: 0.9rem;">Every agent interaction generates a verifiable AI Passport—cryptographic proof of what ran, where, and how. Share them with customers, regulators, or partners. Trust built on math, not promises.</p>
+                            </div>
+                        </div>
+
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Customer-Facing Trust Badges</h4>
+                                <p style="font-size: 0.9rem;">Embed the Lucid trustmark in your product. Your customers see real-time verification that your AI meets safety, sovereignty, and compliance standards—before they send a single message.</p>
+                            </div>
+                        </div>
+
+                        <div class="check-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <path d="m9 12 2 2 4-4"></path>
+                            </svg>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Total Traceability</h4>
+                                <p style="font-size: 0.9rem;">Every inference logged. Every policy enforced. Every audit passed. The paper trail writes itself—automatically, immutably, and in real time.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Existing Chat Visual -->
+                    <div class="animate-up delay-2">
+                        <!-- Sovereign Chat Interface (New) -->
+                        <div class="chat-container-wrapper">
+
+                            <!-- The Main Chat UI -->
+                            <div class="sovereign-chat-card">
+                                <div class="chat-header">
+                                    <div class="chat-header-brand">
+                                        <img src="lucid-logo.svg" alt="Lucid" width="24" height="24"
+                                            class="chat-logo-spin">
+                                        <div>
+                                            <div class="chat-title">Sovereign Chat</div>
+                                            <div class="chat-subtitle">Powered by Lucid</div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-actions">
+                                        <!-- Trustmark Badge Moved Here -->
+                                        <div class="trustmark-wrapper">
+                                            <button class="trustmark-btn" id="trustmark-trigger">
+                                                <svg class="trustmark-shield-icon" viewBox="0 0 24 24" fill="black"
+                                                    stroke="none">
+                                                    <path
+                                                        d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm0 14c-1.1 0-2-.9-2-2 0-.46.17-.88.45-1.2L10 10h4l-.45 2.8c.28.32.45.74.45 1.2 0 1.1-.9 2-2 2z">
+                                                    </path>
+                                                </svg>
+                                                <div>
+                                                    <div class="tm-label">SECURED BY</div>
+                                                    <div class="tm-brand">LUCID COMPUTING</div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="chat-controls-row">
+                                    <!-- Fake Model Selector -->
+                                    <div class="model-select">
+                                        <span>llama3.1:70b</span>
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M6 9l6 6 6-6" />
+                                        </svg>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="chat-body">
+                                    <!-- Static Text (Typewriter removed) -->
+                                    <div class="chat-message ai-message">
+                                        Hello! I'm running inside a hardware-secured Trusted Execution Environment with
+                                        Intel TDX
+                                        and NVIDIA H100 confidential computing. My model weights have been
+                                        cryptographically
+                                        verified, and I have a valid safety receipt proving I passed evaluation. Click
+                                        the
+                                        AI
+                                        Passport icon to view the attestation details and safety receipt.
+                                        <div class="msg-meta">13:39</div>
+                                    </div>
+                                </div>
+
+                                <div class="chat-input-area disabled">
+                                    <input type="text" class="chat-input" placeholder="User types here..."
+                                        disabled>
+                                    <button class="chat-send-btn" disabled>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="chat-footer">
+                                    <div class="footer-badge">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="var(--c-green)" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                                            <path
+                                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                            </path>
+                                        </svg>
+                                        US Jurisdiction Verified
+                                    </div>
+                                    <div class="footer-badge">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="var(--c-green)" stroke-width="2">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg>
+                                        Secure Chat
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Passport Overlay (Hidden by default) -->
+                            <div class="passport-overlay" id="passport-popup">
+                                <div class="passport-card-popup">
+                                    <button class="close-passport" id="close-passport">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+
+                                    <!-- Header -->
+                                    <div class="pp-header">
+                                        <div class="pp-header-row">
+                                            <i class="ph ph-shield" style="font-size:1.25rem;color:#eab308"></i>
+                                            <span class="pp-title">AI PASSPORT</span>
+                                            <span class="pp-verified">VERIFIED</span>
+                                        </div>
+                                        <div class="pp-identity">
+                                            <div class="pp-identity-inner">
+                                                <div class="pp-identity-main">
+                                                    <span class="pp-model-name">Sovereign Agent</span>
+                                                    <span class="pp-operator">operated by Lucid Computing</span>
+                                                </div>
+                                                <div class="pp-meta">
+                                                    <button class="pp-model-id" id="pp-copy-model-id" title="Click to copy">
+                                                        sha256:7f3a...e9d1
+                                                        <i class="ph ph-copy" style="font-size:0.625rem"></i>
+                                                    </button>
+                                                    <span class="pp-meta-sep">&middot;</span>
+                                                    <span class="pp-location">
+                                                        <i class="ph ph-map-pin" style="font-size:0.625rem"></i>
+                                                        Stockholm (Sweden) &middot; AWS
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <a href="verify/" class="pp-qr-link" title="Scan to verify this passport">
+                                                <canvas id="pp-qr-canvas" width="48" height="48"></canvas>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pages Container -->
+                                    <div class="pp-pages-container" id="pp-pages">
+
+                                        <!-- Page 0: Summary -->
+                                        <div class="pp-page active" data-page="0">
+                                            <div class="pp-tier-header">
+                                                <span class="pp-tier-title">SECURITY &amp; COMPLIANCE</span>
+                                                <span class="pp-tier-badge">All 12 Passed</span>
+                                            </div>
+                                            <div class="pp-auditor-cards" id="pp-tier1-cards"></div>
+
+                                            <button class="pp-tier2-toggle" id="pp-tier2-toggle" type="button">
+                                                <span class="pp-tier2-toggle-title">QUALITY &amp; MONITORING</span>
+                                                <span class="pp-tier2-toggle-action">
+                                                    <i class="ph ph-caret-down pp-tier2-chevron" id="pp-tier2-chevron"></i>
+                                                    <span id="pp-tier2-label">Show 6</span>
+                                                </span>
+                                            </button>
+                                            <div class="pp-auditor-cards pp-tier2-cards" id="pp-tier2-cards" style="display:none"></div>
+
+                                            <div class="pp-compliance-footer">
+                                                <div class="pp-compliance-row">
+                                                    <span class="pp-compliance-label">Complies with:</span>
+                                                    <div class="pp-compliance-badges">
+                                                        <span class="pp-framework-badge">SOC 2</span>
+                                                        <span class="pp-framework-badge">GDPR</span>
+                                                        <span class="pp-framework-badge">HIPAA</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Page 1: Compliance Mappings -->
+                                        <div class="pp-page" data-page="1">
+                                            <div class="pp-compliance-page-header">
+                                                <i class="ph ph-scales" style="font-size:1.25rem;color:#14b8a6"></i>
+                                                <div>
+                                                    <span class="pp-compliance-page-title">Compliance Mappings</span>
+                                                    <span class="pp-compliance-page-subtitle">4 controls mapped across 3 frameworks</span>
+                                                </div>
+                                            </div>
+                                            <div class="pp-compliance-entries" id="pp-compliance-entries"></div>
+                                        </div>
+
+                                        <!-- Page 14: Verify -->
+                                        <div class="pp-page" data-page="14">
+                                            <div class="pp-verify-header">
+                                                <i class="ph ph-shield-warning" style="font-size:1.25rem;color:#f59e0b"></i>
+                                                <div>
+                                                    <span class="pp-verify-title">Never Trust, Always Verify</span>
+                                                    <span class="pp-verify-subtitle">Don't even take our word for it</span>
+                                                </div>
+                                            </div>
+                                            <p class="pp-verify-intro">
+                                                Every claim in this passport is backed by cryptographic attestations signed by hardware root of trust. You can independently verify them.
+                                            </p>
+
+                                            <div class="pp-verify-section">
+                                                <div class="pp-verify-step-header">
+                                                    <span class="pp-step-number">1</span>
+                                                    <span class="pp-step-title">Download Attestation Bundle</span>
+                                                </div>
+                                                <p class="pp-step-desc">Get the signed attestation quotes and certificate chains.</p>
+                                                <button class="pp-download-btn" id="pp-download-bundle">
+                                                    <i class="ph ph-download-simple" style="font-size:0.875rem"></i>
+                                                    <span>Download Bundle (.json)</span>
+                                                </button>
+                                            </div>
+
+                                            <div class="pp-verify-section">
+                                                <div class="pp-verify-step-header">
+                                                    <span class="pp-step-number">2</span>
+                                                    <span class="pp-step-title">Verify Hardware Quote</span>
+                                                </div>
+                                                <p class="pp-step-desc">Use vendor tools to verify the attestation quote against the hardware root of trust.</p>
+                                                <button class="pp-code-block" id="pp-copy-verify-cmd" title="Click to copy">
+                                                    <code>snpguest verify attestation ./report.bin ./certs/</code>
+                                                    <i class="ph ph-copy pp-copy-icon" style="font-size:0.75rem"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="pp-verify-section">
+                                                <div class="pp-verify-step-header">
+                                                    <span class="pp-step-number">3</span>
+                                                    <span class="pp-step-title">Compare Measurements</span>
+                                                </div>
+                                                <p class="pp-step-desc">Confirm the runtime measurements match the expected values published in our transparency log.</p>
+                                                <a href="#" class="pp-text-link">
+                                                    <span>View Transparency Log</span>
+                                                    <i class="ph ph-arrow-square-out" style="font-size:0.75rem"></i>
+                                                </a>
+                                            </div>
+
+                                            <div class="pp-verify-section pp-verify-section-last">
+                                                <div class="pp-verify-step-header">
+                                                    <span class="pp-step-number">4</span>
+                                                    <span class="pp-step-title">Hardware Vendor Services</span>
+                                                </div>
+                                                <p class="pp-step-desc">Fetch certificate chains directly from hardware vendors.</p>
+                                                <div class="pp-vendor-links">
+                                                    <a href="https://kdsintf.amd.com" target="_blank" rel="noopener noreferrer" class="pp-vendor-link">
+                                                        <span>AMD KDS</span>
+                                                        <i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i>
+                                                    </a>
+                                                    <a href="https://api.trustedservices.intel.com/sgx/certification/v4" target="_blank" rel="noopener noreferrer" class="pp-vendor-link">
+                                                        <span>Intel PCS</span>
+                                                        <i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i>
+                                                    </a>
+                                                    <a href="https://nras.attestation.nvidia.com" target="_blank" rel="noopener noreferrer" class="pp-vendor-link">
+                                                        <span>NVIDIA NRAS</span>
+                                                        <i class="ph ph-arrow-square-out" style="font-size:0.625rem"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Pagination Footer -->
+                                    <div class="pp-pagination" id="pp-pagination">
+                                        <button class="pp-page-btn" id="pp-prev" disabled aria-label="Previous page">
+                                            <i class="ph ph-caret-left"></i>
+                                        </button>
+                                        <span class="pp-page-info" id="pp-page-info">1 / 15</span>
+                                        <button class="pp-page-btn" id="pp-next" aria-label="Next page">
+                                            <i class="ph ph-caret-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- closing the 66% column from grid-33-66 -->
+            </div> <!-- closing grid-33-66 -->
+        </section>
+
+    <!-- ============================================
+         SECTION: SUPER CONFIDENTIAL / SCROLLY ANIMATION
+         ============================================ -->
+    <section id="solution" class="bg-black scrolly-section">
+        <div class="container text-left">
+            <!-- Sticky container for both diagram and text -->
+            <div class="scrolly-sticky-wrapper">
+                <div class="scrolly-sticky-content">
+                    <div class="section-header animate-up">
+                        <span class="pill pill-dark">SUPER CONFIDENTIAL</span>
+                        <h2 style="margin-top: 1rem;">The Architecture of Trust</h2>
+                    </div>
+
+                    <div class="scrolly-main">
+                        <!-- Left: Architecture Diagram -->
+                        <div class="scrolly-diagram">
+                            <svg viewBox="0 0 800 680" class="architecture-diagram" id="arch-svg">
+                                <!-- User Requests (top, arrow going down) -->
+                                <g class="arch-external">
+                                    <text x="400" y="18" text-anchor="middle" class="arrow-text">User Requests</text>
+                                    <path d="M400 24 V 58" marker-end="url(#arrowhead)" />
+                                </g>
+
+                                <!-- Verifiable Agent Pod (outer boundary) -->
+                                <g id="tee-box" class="arch-box">
+                                    <rect x="100" y="68" width="600" height="430" rx="0" />
+                                    <!-- Lock Icon -->
+                                    <g transform="translate(130, 80) scale(1.4)">
+                                        <path
+                                            d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"
+                                            fill="#ffffff" />
+                                    </g>
+                                    <text x="400" y="106" text-anchor="middle" class="arch-text-header">Verifiable
+                                        Agent Pod</text>
+
+                                    <!-- Agent / Model -->
+                                    <g id="model-box" class="arch-box inner-model">
+                                        <rect x="250" y="125" width="300" height="65" rx="0" />
+                                        <text x="400" y="164" text-anchor="middle" class="arch-text">Agent</text>
+                                    </g>
+
+                                    <!-- Flow arrow: Model → Auditors -->
+                                    <g class="arch-arrows">
+                                        <path d="M400 190 V 218" marker-end="url(#arrowhead)" />
+                                    </g>
+
+                                    <!-- Auditor cards (separate boxes) -->
+                                    <g id="evaluator-box" class="arch-box inner">
+                                        <rect x="145" y="228" width="130" height="60" rx="0" />
+                                        <text x="210" y="264" text-anchor="middle" class="arch-text" style="font-size: 13px;">Guardrails</text>
+                                    </g>
+                                    <g id="auditor-pii" class="arch-box inner">
+                                        <rect x="290" y="228" width="100" height="60" rx="0" />
+                                        <text x="340" y="264" text-anchor="middle" class="arch-text" style="font-size: 13px;">PII</text>
+                                    </g>
+                                    <g id="auditor-sovereignty" class="arch-box inner">
+                                        <rect x="405" y="228" width="130" height="60" rx="0" />
+                                        <text x="470" y="264" text-anchor="middle" class="arch-text" style="font-size: 13px;">Sovereignty</text>
+                                    </g>
+                                    <g id="auditor-eval" class="arch-box inner">
+                                        <rect x="550" y="228" width="100" height="60" rx="0" />
+                                        <text x="600" y="264" text-anchor="middle" class="arch-text" style="font-size: 13px;">Eval</text>
+                                    </g>
+
+                                    <!-- Flow arrow: Auditors → Gateway -->
+                                    <g class="arch-arrows">
+                                        <path d="M400 288 V 320" marker-end="url(#arrowhead)" />
+                                        <text x="440" y="310" class="arrow-text" style="font-size: 9px;">claims</text>
+                                    </g>
+
+                                    <!-- Gateway (separate card) -->
+                                    <g id="gateway-box" class="arch-box inner">
+                                        <rect x="225" y="330" width="350" height="65" rx="0" />
+                                        <text x="400" y="368" text-anchor="middle" class="arch-text">Gateway</text>
+                                    </g>
+
+                                    <!-- Flow arrow: Gateway → edge of pod -->
+                                    <g class="arch-arrows">
+                                        <path d="M400 395 V 425" />
+                                    </g>
+                                </g>
+
+                                <!-- Flow arrow: Pod → Verifier (exits pod) -->
+                                <g class="arch-arrows" id="verification-group">
+                                    <path d="M400 498 V 540" marker-end="url(#arrowhead)" />
+                                    <text x="455" y="525" class="arrow-text" style="font-size: 9px;">signed evidence</text>
+                                </g>
+
+                                <!-- Lucid Verifier Service (outside pod, below) -->
+                                <g id="verifier-box" class="arch-box">
+                                    <rect x="200" y="550" width="400" height="80" rx="0" />
+                                    <image href="lucid-logo.svg" x="220" y="560" width="60" height="60"
+                                        style="filter: brightness(0) invert(1);" />
+                                    <text x="430" y="595" text-anchor="middle" class="arch-text">Lucid Verifier
+                                        Service</text>
+                                </g>
+
+                                <!-- AI Passport (bottom, arrow going down) -->
+                                <g class="arch-external">
+                                    <path d="M400 630 V 660" marker-end="url(#arrowhead)" />
+                                    <text x="400" y="678" text-anchor="middle" class="arrow-text">AI Passport</text>
+                                </g>
+
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+                                        orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
+                                    </marker>
+                                    <marker id="arrowhead-yellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+                                        orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#f8d648" />
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+
+                        <!-- Right: Text panels that fade in/out -->
+                        <div class="scrolly-text-area">
+                            <div class="text-panel" id="panel-tee">
+                                <div class="text-panel-header">
+                                    <span class="step-num">01</span>
+                                    <svg class="step-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </div>
+                                <h3>Verifiable Agent Pods</h3>
+                                <p class="panel-subtitle">Agents as Colleagues, Governed as Machines</p>
+                                <p>Your AI agent gets a full identity — email, workspace presence, shared docs — just like onboarding a new teammate. Underneath, the Operator injects governance sidecars into a single hardware-encrypted pod where the CPU itself prevents anyone — even Lucid — from accessing its memory, credentials, or data.</p>
+                            </div>
+                            <div class="text-panel" id="panel-evaluator">
+                                <div class="text-panel-header">
+                                    <span class="step-num">02</span>
+                                    <svg class="step-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                                <h3>Auditor Chain &amp; Gateway</h3>
+                                <p class="panel-subtitle">Sidecar Guardrails, One Cedar Decision</p>
+                                <p>Every request flows from the model through a chain of auditor sidecars — Guardrails, PII, Sovereignty, Eval — each producing typed claims about the traffic. The Gateway collects all claims and evaluates a single Cedar policy to allow, deny, or warn. One policy, one decision per request — no scattered logic.</p>
+                            </div>
+                            <div class="text-panel" id="panel-verifier">
+                                <div class="text-panel-header">
+                                    <span class="step-num">03</span>
+                                    <svg class="step-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    </svg>
+                                </div>
+                                <h3>Verifier &amp; AI Passport</h3>
+                                <p class="panel-subtitle">Cryptographic Proof, Outside the Pod</p>
+                                <p>The Gateway bundles all claims, the Cedar decision, and a TEE signature into signed evidence — then sends it to the Lucid Verifier service outside the pod. The Verifier appraises the evidence against hardware quotes and issues an AI Passport: tamper-proof, independently verifiable cryptographic proof of everything the agent did.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invisible scroll triggers -->
+                <div class="scroll-triggers">
+                    <div class="trigger" data-highlight="tee-box" data-panel="panel-tee"></div>
+                    <div class="trigger" data-highlight="evaluator-box,gateway-box" data-panel="panel-evaluator"></div>
+                    <div class="trigger" data-highlight="verifier-box" data-panel="panel-verifier"></div>
+                </div>
+            </div>
+            <a href="#marketplace" class="arrow-next" aria-label="Next Section"><svg width="32" height="32"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6"></path>
+                </svg></a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SECTION: SUPER CHEAP
+         ============================================ -->
+    <section id="pricing" class="bg-black">
+        <div class="container text-left">
+            <div class="section-header animate-up">
+                <span class="pill pill-dark">SUPER CHEAP</span>
+                <h2 style="margin-top: 1rem;">Frontier Intelligence. Fraction of the Cost.</h2>
+            </div>
+            <div class="grid-33-66">
+                <!-- Left Panel -->
+                <div class="animate-up delay-1" style="text-align: left;">
+                    <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.85;">
+                        We run the best open-source models and optimize them with static kernel analysis—squeezing 50% more throughput from the same hardware. The result: frontier-class performance at a fraction of proprietary API pricing.
+                    </p>
+
+                    <!-- Optimization callout -->
+                    <div class="pricing-callout" style="margin-top: 1.5rem;">
+                        <div class="pricing-callout-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-brand)" stroke-width="2">
+                                <path d="M12 20V10"/>
+                                <path d="M18 20V4"/>
+                                <path d="M6 20v-4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Static Kernel Analysis</strong> — We profile and optimize model computation graphs at compile time, fusing operations, eliminating redundant memory transfers, and tuning GPU kernel dispatch. The result: 50% more throughput from the same hardware, passed directly to you as lower prices.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Tabbed Pricing Slideshow -->
+                <div class="animate-up delay-2">
+                    <!-- Tab Buttons -->
+                    <div class="pricing-tabs">
+                        <button class="pricing-tab active" data-pricing-tab="fast">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-brand)" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                            Fast Model
+                        </button>
+                        <button class="pricing-tab" data-pricing-tab="thinking">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/>
+                                <line x1="9" y1="21" x2="15" y2="21"/>
+                            </svg>
+                            Thinking Model
+                        </button>
+                    </div>
+
+                    <!-- Slide: Fast Model -->
+                    <div class="pricing-slide active" data-pricing-slide="fast">
+                        <div class="pricing-tier-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-brand)" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                            <h3>Fast Model</h3>
+                        </div>
+                        <p class="pricing-tier-desc">High-speed inference for real-time tasks</p>
+
+                        <div class="pricing-table-wrap">
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="pricing-highlight-col">
+                                            <span class="pricing-model-badge lucid">Lucid</span>
+                                        </th>
+                                        <th>
+                                            <span class="pricing-model-badge proprietary">Gemini 2.0 Flash</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="pricing-label">Input <span class="pricing-unit">/ 1M tokens</span></td>
+                                        <td class="pricing-highlight-col"><strong>$0.04</strong></td>
+                                        <td>$0.10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pricing-label">Output <span class="pricing-unit">/ 1M tokens</span></td>
+                                        <td class="pricing-highlight-col"><strong>$0.15</strong></td>
+                                        <td>$0.40</td>
+                                    </tr>
+                                    <tr class="pricing-savings-row">
+                                        <td class="pricing-label">Savings</td>
+                                        <td class="pricing-highlight-col"><span class="pricing-savings">~62% cheaper</span></td>
+                                        <td>—</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Slide: Thinking Model -->
+                    <div class="pricing-slide" data-pricing-slide="thinking">
+                        <div class="pricing-tier-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-brand)" stroke-width="2">
+                                <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/>
+                                <line x1="9" y1="21" x2="15" y2="21"/>
+                            </svg>
+                            <h3>Thinking Model</h3>
+                        </div>
+                        <p class="pricing-tier-desc">Deep reasoning for complex tasks</p>
+
+                        <div class="pricing-table-wrap">
+                            <table class="pricing-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="pricing-highlight-col">
+                                            <span class="pricing-model-badge lucid">Lucid</span>
+                                        </th>
+                                        <th>
+                                            <span class="pricing-model-badge proprietary">Claude Opus 4.6</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="pricing-label">Input <span class="pricing-unit">/ 1M tokens</span></td>
+                                        <td class="pricing-highlight-col"><strong>$4.00</strong></td>
+                                        <td>$15.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pricing-label">Output <span class="pricing-unit">/ 1M tokens</span></td>
+                                        <td class="pricing-highlight-col"><strong>$20.00</strong></td>
+                                        <td>$75.00</td>
+                                    </tr>
+                                    <tr class="pricing-savings-row">
+                                        <td class="pricing-label">Savings</td>
+                                        <td class="pricing-highlight-col"><span class="pricing-savings">~73% cheaper</span></td>
+                                        <td>—</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- closing grid-33-66 -->
+        </div>
+    </section>
+
+    </div> <!-- closing line-alignment-wrapper -->
+
+    <!-- SECTION 7: THE COMPLIANCE MARKETPLACE -->
+    <section id="marketplace" class="bg-black">
+        <div class="container">
+            <div class="animate-up" style="text-align: center; margin-bottom: 1rem;">
+                <h2>Don't Build Compliance. <span class="highlight">Deploy It.</span></h2>
+                <p class="subtitle" style="margin-left: auto; margin-right: auto;">Why waste engineering months on regulatory catch-up? Access a growing library of verified auditor bots designed by leading law firms, security vendors, and standards bodies.</p>
+            </div>
+
+            <!-- Framework selector chips -->
+            <div class="marketplace-frameworks animate-up delay-1" id="framework-row"></div>
+
+            <!-- Filter summary -->
+            <div class="mp-filter-summary" id="filter-summary" style="display:none;"></div>
+
+            <!-- Auditor grid -->
+            <div class="marketplace-grid animate-up delay-2" id="auditor-grid"></div>
+
+            <div class="text-center animate-up delay-2" style="margin-top: 3rem;">
+                <a href="site/index.html" class="btn btn-primary">Explore More</a>
+            </div>
+        </div>
+
+        <!-- Detail modal -->
+        <div class="mp-modal-backdrop" id="mp-modal-backdrop"></div>
+        <div class="mp-modal" id="mp-modal">
+            <div class="mp-modal-header">
+                <h3 class="mp-modal-title"></h3>
+                <button class="mp-modal-close" aria-label="Close"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="mp-modal-body"></div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: INSIGHTS -->
+    <section id="insights-preview" class="bg-black">
+        <div class="container text-left">
+            <div class="section-header animate-up" style="text-align: center;">
+                <h2>Industry Insights</h2>
+            </div>
+
+            <div class="insights-carousel-wrapper animate-up delay-1">
+                <button class="carousel-arrow carousel-prev" onclick="scrollInsightsCarousel(-1)" aria-label="Previous">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="insights-carousel" id="insights-carousel">
+                    <!-- Posts will be loaded dynamically -->
+                    <div class="loader">Loading insights...</div>
+                </div>
+
+                <button class="carousel-arrow carousel-next" onclick="scrollInsightsCarousel(1)" aria-label="Next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="insights-cta-row animate-up delay-2">
+                <a href="insights.html" class="btn-outline-light">
+                    View All Insights
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: CTA -->
+    <section id="cta" class="cta-section">
+
+        <div class="container">
+            <div class="cta-grid">
+                <div class="cta-left">
+                    <h2 class="cta-title">Ready to deploy your <span class="highlight">Army of Agents</span>?</h2>
+                    <p class="cta-subtitle">
+                        Super productive. Super secure. Super trustworthy. Super confidential. Super cheap. Get started today.
+                    </p>
+
+
+                </div>
+
+                <div class="form-card">
+                    <form id="contact-form">
+                        <div class="input-group">
+                            <label class="input-label" for="user_name">Name</label>
+                            <input type="text" id="user_name" name="name" class="input-field" placeholder="Full Name"
+                                required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="user_email">Work Email</label>
+                            <input type="email" id="user_email" name="email" class="input-field"
+                                placeholder="name@company.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="message">Project Details</label>
+                            <textarea id="message" name="message" class="input-field" rows="4"
+                                placeholder="Tell us about your infrastructure needs..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submit-btn">Request Access</button>
+                        <div id="form-message" class="form-message" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fallback posts data for file:// protocol (CORS blocked)
+        const FALLBACK_POSTS = [
+            {
+                title: "Cryptographic Verification: A Strategy for U.S. AI Export Leadership",
+                slug: "cryptographic-verification-a-strategy-for-us-ai-export-leadership",
+                date: "2025-11-03",
+                tags: ["National Security"],
+                image: "media/pE4sNBZQBMDmfBnLeT4iNAVf9V0.png",
+                description: "Turning Sovereign AI Requirements into U.S. Export Opportunities"
+            },
+            {
+                title: "Navigating the Maze of AI and Data Sovereignty in the EU",
+                slug: "navigating-the-maze-of-ai-and-data-sovereignty-in-the-eu",
+                date: "2025-08-29",
+                tags: ["Data Sovereignty"],
+                image: "media/TAgIxThuWHOm5a9n0FTDD5ddk.png",
+                description: "Can hardware-rooted attestation provide a verifiable proof of compliance across EU regulations?"
+            },
+            {
+                title: "AI Exports at Scale Require Verification, Not Just Counting",
+                slug: "ai-exports-at-scale-require-verification-not-just-counting",
+                date: "2025-08-08",
+                tags: ["National Security"],
+                image: "media/wbfAO30etTdjdRF5oESER55KaA.png",
+                description: "To fulfill the promise of the AI Action Plan, export controls must evolve beyond physical counting."
+            },
+            {
+                title: "America First AI Policy in Action",
+                slug: "america-first-ai-policy-in-action",
+                date: "2025-07-15",
+                tags: ["National Security"],
+                image: "media/oole08QnB2huPcp75s2WqGn8uMQ.png",
+                description: "The Congressional roadmap for scaling American AI leadership globally."
+            }
+        ];
+
+        // Insights Carousel
+        async function loadInsightsCarousel() {
+            const carousel = document.getElementById('insights-carousel');
+            if (!carousel) return;
+
+            let data = null;
+
+            try {
+                // Try to fetch posts data
+                const paths = ['data/processed_posts.json', '_data/processed_posts.json'];
+
+                for (const path of paths) {
+                    try {
+                        const response = await fetch(path);
+                        if (response.ok) {
+                            data = await response.json();
+                            break;
+                        }
+                    } catch (e) {
+                        continue;
+                    }
+                }
+            } catch (error) {
+                console.warn('Fetch failed, using fallback data:', error);
+            }
+
+            // Use fallback if fetch failed (common with file:// protocol)
+            if (!data || data.length === 0) {
+                data = FALLBACK_POSTS;
+            }
+
+            // Sort by date (newest first) and take first 4
+            const posts = data.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 4);
+
+            // Render carousel cards
+            carousel.innerHTML = posts.map(post => {
+                const tag = post.tags && post.tags.length > 0 ?
+                    (Array.isArray(post.tags[0]) ? post.tags[0][0] : post.tags[0].split(',')[0].trim()) : 'Insight';
+                return `
+                    <a href="article.html?slug=${post.slug}" class="insight-card">
+                        <img src="${post.image}" alt="${post.title}" class="insight-card-img">
+                        <div class="insight-card-content">
+                            <div class="insight-card-meta">
+                                <span class="insight-card-tag">${tag}</span>
+                                <span>${post.date}</span>
+                            </div>
+                            <h4 class="insight-card-title">${post.title}</h4>
+                            <p class="insight-card-desc">${post.description}</p>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        function scrollInsightsCarousel(direction) {
+            const carousel = document.getElementById('insights-carousel');
+            if (!carousel) return;
+            const scrollAmount = 340;
+            carousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Load insights on page load
+        document.addEventListener('DOMContentLoaded', loadInsightsCarousel);
+
+        // Dynamic Text Animation (Rotator)
+
+        const rotatorOptions = ["Securely", "Confidentially", "Affordably", "Verifiably", "Compliantly"];
+        let rotatorIndex = 0;
+        const rotatorSuffix = document.getElementById('rotator-suffix');
+
+        if (rotatorSuffix) {
+            setInterval(() => {
+                rotatorIndex = (rotatorIndex + 1) % rotatorOptions.length;
+                rotatorSuffix.style.opacity = '0';
+                setTimeout(() => {
+                    rotatorSuffix.textContent = rotatorOptions[rotatorIndex];
+                    rotatorSuffix.style.opacity = '1';
+                }, 500);
+            }, 3000);
+        }
+
+        // Hero Terminal Animation
+        const heroTerminal = document.getElementById('hero-terminal');
+        if (heroTerminal) {
+            const logs = [
+                "[SEC_OPS] Blocked connection to 192.168.x.x",
+                "[GOV_OPS] Logged interaction ID: #8821a",
+                "[DEV_OPS] Memory integrity check: PASS",
+                "[NET_OPS] RTT validation: 12.4ms",
+                "[SEC_OPS] Policy enforcing: strict-egress",
+                "[GOV_OPS] Audit stream: ACTIVE"
+            ];
+            let logIndex = 0;
+            setInterval(() => {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                line.textContent = logs[logIndex % logs.length];
+                heroTerminal.appendChild(line);
+                heroTerminal.scrollTop = heroTerminal.scrollHeight;
+                if (heroTerminal.children.length > 5) {
+                    heroTerminal.removeChild(heroTerminal.children[0]);
+                }
+                logIndex++;
+            }, 2000);
+        }
+
+        // PASTE YOUR GOOGLE WEB APP URL HERE
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwev8_veezEgmc6waPr3UAHGIFc1e3o6eROTaHBGKlTJC7-o7SI1qvNQp11VHZZKfEboA/exec";
+
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const form = this;
+            const btn = document.getElementById('submit-btn');
+            const msgDiv = document.getElementById('form-message');
+
+            // Loading State
+            btn.disabled = true;
+            btn.textContent = "Sending...";
+            msgDiv.style.display = 'none';
+
+            // Collect Data as URL-encoded string
+            const formData = new URLSearchParams();
+            formData.append('name', document.getElementById('user_name').value);
+            formData.append('email', document.getElementById('user_email').value);
+            formData.append('message', document.getElementById('message').value);
+
+            // Send to Google Apps Script
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData.toString()
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === "success") {
+                        // Success Message with enhanced confirmation
+                        msgDiv.className = 'form-message success';
+                        msgDiv.innerHTML = "<strong>Message sent successfully!</strong><br>We've received your request and will be in touch soon.";
+                        msgDiv.style.display = 'block';
+
+                        // Create fireworks
+                        // createFireworks(btn); // This function is not defined in the provided context. Keeping it commented out.
+
+                        // Reset form
+                        form.reset();
+
+                        // Optional: Show a brief visual confirmation on the button
+                        btn.style.background = 'var(--c-green)';
+                        setTimeout(() => {
+                            btn.style.background = '';
+                        }, 2000);
+                    } else {
+                        throw new Error(data.error);
+                    }
+                })
+                .catch(error => {
+                    // Error Message
+                    console.error('Error:', error);
+                    msgDiv.className = 'form-message error';
+                    msgDiv.innerHTML = "<strong>Something went wrong.</strong><br>Please email us directly at <a href='mailto:info@lucidcomputing.ai' style='color: var(--c-red); text-decoration: underline;'>info@lucidcomputing.ai</a>";
+                    msgDiv.style.display = 'block';
+
+                    // Scroll to message to ensure it's visible
+                    msgDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                })
+                .finally(() => {
+                    btn.disabled = false;
+                    btn.textContent = "Request Demo";
+                });
+        });
+
+        // Sovereign Chat — Passport Overlay Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const trustmarkBtn = document.getElementById('trustmark-trigger');
+            const passportPopup = document.getElementById('passport-popup');
+            const closePassportBtn = document.getElementById('close-passport');
+            const chatCard = document.querySelector('.sovereign-chat-card');
+            const tooltip = document.querySelector('.trustmark-tooltip');
+
+            // --- Auditor Data (all 12) ---
+            const auditors = [
+                // Tier 1 — Security & Compliance
+                { id: 'pii', humanName: 'Data Shield', question: 'Is personal data protected?', subtitle: 'Names, emails, and phone numbers are automatically removed before processing', answer: 'Removes personal data automatically', icon: 'ph-lock', color: '#3b82f6', statusType: 'badge', statusValue: 'GDPR', stats: ['GDPR mode active', '7,350 items redacted last month', '0 data leaks'], category: 'Compliance', metrics: [{ label: 'PII items redacted', value: 7350, max: 10000, pct: 73 }, { label: 'Data leak incidents', value: 0, max: 10, pct: 0 }, { label: 'Compliance score', value: 100, max: 100, pct: 100 }] },
+                { id: 'sovereignty', humanName: 'Data Residency', question: 'Where is my data stored?', subtitle: 'All computation stays within your chosen geographic region', answer: 'Stays in your region', icon: 'ph-map-pin', color: '#f59e0b', statusType: 'badge', statusValue: 'STOCKHOLM', stats: ['Stockholm (Sweden)', 'No cross-border transfers', 'Fully compliant'], category: 'Compliance', metrics: [{ label: 'Data in-region', value: 100, max: 100, pct: 100 }, { label: 'Cross-border transfers', value: 0, max: 100, pct: 0 }, { label: 'Uptime', value: 99.9, max: 100, pct: 99 }] },
+                { id: 'compute', humanName: 'Encrypted Computing', question: 'Is all my data encrypted?', subtitle: 'AI runs inside encrypted memory that nobody — not even us — can access', answer: 'Encrypted memory nobody can access', icon: 'ph-hard-drives', color: '#8b5cf6', statusType: 'badge', statusValue: 'INTEL TDX', stats: ['TEE hardware attested', 'SLSA Level 3', 'All memory encrypted'], category: 'Security', metrics: [{ label: 'Hardware attestation', value: 100, max: 100, pct: 100 }, { label: 'SLSA level', value: 3, max: 4, pct: 75 }, { label: 'Memory encryption', value: 100, max: 100, pct: 100 }] },
+                { id: 'guardrails', humanName: 'Prompt Firewall', question: 'Is it safe from prompt attacks?', subtitle: 'Every prompt is scanned before the AI sees it', answer: 'Blocks harmful content & attacks', icon: 'ph-shield-check', color: '#22c55e', statusType: 'badge', statusValue: 'ACTIVE', stats: ['385,410 prompts scanned last month', '2,012 malicious prompts blocked', '0 attacks got through'], category: 'Security', metrics: [{ label: 'Prompts scanned', value: 385410, max: 400000, pct: 96 }, { label: 'Attacks blocked', value: 2012, max: 2012, pct: 100 }, { label: 'Bypass rate', value: 0, max: 100, pct: 0 }] },
+                { id: 'policy', humanName: 'Rule Enforcer', question: 'Does it follow your rules?', subtitle: 'Custom business rules are checked on every request and response', answer: 'Enforces your policies', icon: 'ph-file-text', color: '#3b82f6', statusType: 'badge', statusValue: 'ENFORCED', stats: ['5 active rules', '100% compliance rate', '360 violations caught last month'], category: 'Compliance', metrics: [{ label: 'Active rules', value: 5, max: 10, pct: 50 }, { label: 'Compliance rate', value: 100, max: 100, pct: 100 }, { label: 'Violations caught', value: 360, max: 500, pct: 72 }] },
+                { id: 'model-security', humanName: 'Model Scanner', question: 'Has the model been tampered with?', subtitle: 'The AI model is scanned for backdoors, trojans, and unauthorized modifications', answer: 'No backdoors or tampering', icon: 'ph-shield', color: '#ef4444', statusType: 'badge', statusValue: 'SECURE', stats: ['5 integrity scans completed', '0 threats found', 'Checksums verified'], category: 'Security', metrics: [{ label: 'Integrity scans', value: 5, max: 5, pct: 100 }, { label: 'Threats detected', value: 0, max: 10, pct: 0 }, { label: 'Checksum match', value: 100, max: 100, pct: 100 }] },
+                // Tier 2 — Quality & Monitoring
+                { id: 'eval', humanName: 'AI Evaluator', question: 'How smart and accurate is it?', subtitle: 'Tested against industry benchmarks for knowledge, reasoning, and safety', answer: 'Tested on knowledge & reasoning', icon: 'ph-sparkle', color: '#a855f7', statusType: 'score', statusValue: 92, stats: ['TruthfulQA: 95%', 'CyberSecEval: 98%', 'HarmBench: 91%'], category: 'Evaluation', metrics: [{ label: 'TruthfulQA', value: 95, max: 100, pct: 95 }, { label: 'CyberSecEval', value: 98, max: 100, pct: 98 }, { label: 'HarmBench', value: 91, max: 100, pct: 91 }] },
+                { id: 'fairness', humanName: 'Bias Checker', question: 'Does it treat everyone equally?', subtitle: 'Tested for bias across gender, race, age, and other protected groups', answer: 'Treats everyone equally', icon: 'ph-scales', color: '#8b5cf6', statusType: 'score', statusValue: 88, stats: ['Gender bias: not detected', 'Racial bias: not detected', 'Age bias: minor (monitoring)'], category: 'Evaluation', metrics: [{ label: 'Gender fairness', value: 96, max: 100, pct: 96 }, { label: 'Racial fairness', value: 94, max: 100, pct: 94 }, { label: 'Age fairness', value: 88, max: 100, pct: 88 }] },
+                { id: 'red-team', humanName: 'Stress Tester', question: 'Has it been attacked on purpose?', subtitle: "Professional red-teamers tried to break it — here's how it held up", answer: 'Attacked to find weaknesses', icon: 'ph-crosshair', color: '#ef4444', statusType: 'score', statusValue: 88, stats: ['92% jailbreak resistance', '500+ attack templates tested', '0 critical vulnerabilities'], category: 'Security', metrics: [{ label: 'Jailbreak resistance', value: 92, max: 100, pct: 92 }, { label: 'Attack templates', value: 500, max: 500, pct: 100 }, { label: 'Critical vulns', value: 0, max: 10, pct: 0 }] },
+                { id: 'rag-quality', humanName: 'Source Verifier', question: 'Are its answers grounded in facts?', subtitle: 'Checks that every response is backed by real, retrievable sources', answer: 'Retrieves accurate info', icon: 'ph-magnifying-glass', color: '#06b6d4', statusType: 'score', statusValue: 87, stats: ['87% of claims traced to sources', 'Hallucination rate: 2.1%', 'Sources verified'], category: 'Evaluation', metrics: [{ label: 'Claims grounded', value: 87, max: 100, pct: 87 }, { label: 'Hallucination rate', value: 2.1, max: 100, pct: 2 }, { label: 'Source quality', value: 94, max: 100, pct: 94 }] },
+                { id: 'watermark', humanName: 'Content Fingerprint', question: "Can you tell it's AI-generated?", subtitle: 'Every AI response is invisibly watermarked for content provenance', answer: 'AI content is watermarked', icon: 'ph-fingerprint', color: '#14b8a6', statusType: 'badge', statusValue: 'C2PA', stats: ['57k responses watermarked last month', '100% traceable', 'C2PA credentials attached'], category: 'Observability', metrics: [{ label: 'Responses watermarked', value: 57000, max: 60000, pct: 95 }, { label: 'Traceability', value: 100, max: 100, pct: 100 }, { label: 'C2PA coverage', value: 100, max: 100, pct: 100 }] },
+                { id: 'observability', humanName: 'Audit Trail', question: 'Is there a complete record?', subtitle: 'Every request, response, and decision is logged with a tamper-proof signature', answer: 'Everything is logged', icon: 'ph-activity', color: '#fbbf24', statusType: 'badge', statusValue: 'TEE-SIGNED', stats: ['102k traces recorded last month', '100% cryptographically signed', 'Avg cost: $0.003/req'], category: 'Observability', metrics: [{ label: 'Traces recorded', value: 102000, max: 110000, pct: 93 }, { label: 'Signed coverage', value: 100, max: 100, pct: 100 }, { label: 'Avg cost/req', value: 0.003, max: 0.01, pct: 30 }] },
+            ];
+
+            const tier1 = auditors.slice(0, 6);
+            const tier2 = auditors.slice(6, 12);
+            const totalPages = 1 + auditors.length + 1 + 1; // summary + 12 auditors + compliance + verify
+            let currentPage = 0;
+
+            // --- Compliance Data ---
+            const complianceEntries = [
+                { framework: 'SOC 2', clause: 'CC6.6', auditorName: 'Prompt Firewall', auditorColor: '#22c55e', originalText: 'The entity implements logical access security measures to protect against threats from sources outside its system boundaries.', howWeComply: 'The Guardrails auditor detects and blocks prompt injection attempts, which are external threats that try to bypass AI system boundaries.' },
+                { framework: 'SOC 2', clause: 'PI1.1', auditorName: 'Prompt Firewall', auditorColor: '#22c55e', originalText: 'The entity obtains or generates, uses, and communicates relevant, quality information regarding processing integrity.', howWeComply: 'Toxicity detection ensures AI outputs meet quality and appropriateness standards, maintaining processing integrity.' },
+                { framework: 'SOC 2', clause: 'CC6.1', auditorName: 'Data Shield', auditorColor: '#3b82f6', originalText: 'The entity implements logical access security software, infrastructure, and architectures over protected information assets.', howWeComply: 'PII detection automatically identifies and redacts sensitive personal data before it reaches the model.' },
+                { framework: 'GDPR', clause: 'Art. 25', auditorName: 'Data Residency', auditorColor: '#f59e0b', originalText: 'Data protection by design and by default — the controller shall implement appropriate technical and organisational measures.', howWeComply: 'Data residency controls ensure that processing occurs only within authorized geographic jurisdictions.' },
+            ];
+
+            // --- Render Helpers ---
+            function renderAuditorCard(a, index) {
+                var statusHTML = '';
+                if (a.statusType === 'score') {
+                    statusHTML = '<span class="pp-score-bar"><span class="pp-score-fill" style="width:' + a.statusValue + '%;background:' + a.color + '"></span></span><span class="pp-score-value" style="color:' + a.color + '">' + a.statusValue + '%</span>';
+                } else {
+                    statusHTML = '<span class="pp-status-check">&#10003;</span><span class="pp-status-badge">' + a.statusValue + '</span>';
+                }
+                var statsHTML = a.stats.map(function(s) { return '<span class="pp-stat-item">&#9702; ' + s + '</span>'; }).join('');
+                return '<button class="pp-auditor-card" data-auditor-index="' + index + '">' +
+                    '<div class="pp-card-header">' +
+                        '<div class="pp-card-icon" style="color:' + a.color + '"><i class="ph ' + a.icon + '"></i></div>' +
+                        '<span class="pp-card-question">' + a.question + '</span>' +
+                        '<div class="pp-card-status">' + statusHTML + '</div>' +
+                    '</div>' +
+                    '<div class="pp-card-body">' +
+                        '<span class="pp-card-subtitle">' + a.subtitle + '</span>' +
+                        '<span class="pp-card-answer">' + a.answer + '</span>' +
+                        '<div class="pp-card-stats">' + statsHTML + '</div>' +
+                    '</div>' +
+                '</button>';
+            }
+
+            function renderAuditorDetailPage(a) {
+                var catBg = 'rgba(107,114,128,0.1)';
+                var catColor = '#6b7280';
+                if (a.category === 'Security') { catBg = 'rgba(239,68,68,0.1)'; catColor = '#ef4444'; }
+                else if (a.category === 'Evaluation') { catBg = 'rgba(168,85,247,0.1)'; catColor = '#a855f7'; }
+                else if (a.category === 'Compliance') { catBg = 'rgba(59,130,246,0.1)'; catColor = '#3b82f6'; }
+                else if (a.category === 'Observability') { catBg = 'rgba(251,191,36,0.1)'; catColor = '#fbbf24'; }
+
+                var metricsHTML = (a.metrics || []).map(function(m) {
+                    var displayVal = m.value >= 1000 ? Math.round(m.value).toLocaleString() : m.value;
+                    return '<div class="pp-metric-item">' +
+                        '<span class="pp-metric-label">' + m.label + '</span>' +
+                        '<div class="pp-metric-bar-container">' +
+                            '<div class="pp-metric-bar"><div class="pp-metric-bar-fill" style="width:' + m.pct + '%;background:' + a.color + '"></div></div>' +
+                            '<span class="pp-metric-value" style="color:' + a.color + '">' + displayVal + '</span>' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+
+                var statsHTML = a.stats.map(function(s) {
+                    return '<div class="pp-detail-stat-item"><i class="ph ph-check-circle pp-detail-stat-icon"></i><span>' + s + '</span></div>';
+                }).join('');
+
+                return '<div class="pp-auditor-detail-header">' +
+                        '<div class="pp-auditor-detail-icon" style="background:' + catBg + ';color:' + catColor + '"><i class="ph ' + a.icon + '"></i></div>' +
+                        '<div class="pp-auditor-detail-info">' +
+                            '<span class="pp-auditor-detail-name">' + a.humanName + '</span>' +
+                            '<span class="pp-auditor-detail-category">' + a.category + '</span>' +
+                        '</div>' +
+                        '<span class="pp-passed-badge">PASSED</span>' +
+                    '</div>' +
+                    '<p class="pp-detail-question">' + a.question + '</p>' +
+                    '<p class="pp-detail-subtitle">' + a.subtitle + '</p>' +
+                    '<div class="pp-detail-metrics">' + metricsHTML + '</div>' +
+                    '<div class="pp-detail-stats">' + statsHTML + '</div>';
+            }
+
+            function renderCompliancePage() {
+                return complianceEntries.map(function(e) {
+                    return '<div class="pp-compliance-entry">' +
+                        '<div class="pp-compliance-entry-header">' +
+                            '<span class="pp-compliance-fw-badge">' + e.framework + '</span>' +
+                            '<span class="pp-compliance-clause">' + e.clause + '</span>' +
+                        '</div>' +
+                        '<div class="pp-compliance-entry-body">' +
+                            '<div class="pp-compliance-section">' +
+                                '<div class="pp-compliance-section-label"><i class="ph ph-file-text" style="font-size:0.75rem"></i><span>Original Regulation Text</span></div>' +
+                                '<p class="pp-compliance-original-text">"' + e.originalText + '"</p>' +
+                            '</div>' +
+                            '<div class="pp-compliance-section">' +
+                                '<div class="pp-compliance-section-label pp-compliance-section-label-green"><i class="ph ph-check-circle" style="font-size:0.75rem"></i><span>How This Auditor Helps</span></div>' +
+                                '<p class="pp-compliance-how-text">' + e.howWeComply + '</p>' +
+                            '</div>' +
+                            '<div class="pp-compliance-auditor-tag"><div class="pp-compliance-auditor-dot" style="background:' + e.auditorColor + '"></div><span>' + e.auditorName + '</span></div>' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+            }
+
+            // --- Build Summary Cards ---
+            var tier1Container = document.getElementById('pp-tier1-cards');
+            var tier2Container = document.getElementById('pp-tier2-cards');
+            if (tier1Container) {
+                tier1Container.innerHTML = tier1.map(function(a, i) { return renderAuditorCard(a, i); }).join('');
+            }
+            if (tier2Container) {
+                tier2Container.innerHTML = tier2.map(function(a, i) { return renderAuditorCard(a, i + 6); }).join('');
+            }
+
+            // --- Build Auditor Detail Pages (inserted into pages container) ---
+            var pagesContainer = document.getElementById('pp-pages');
+            if (pagesContainer) {
+                // Insert auditor detail pages before the verify page (pages 2-13)
+                var verifyPage = pagesContainer.querySelector('[data-page="14"]');
+                auditors.forEach(function(a, i) {
+                    var page = document.createElement('div');
+                    page.className = 'pp-page';
+                    page.setAttribute('data-page', String(i + 2));
+                    page.innerHTML = renderAuditorDetailPage(a);
+                    pagesContainer.insertBefore(page, verifyPage);
+                });
+
+                // Build compliance entries
+                var complianceEntriesEl = document.getElementById('pp-compliance-entries');
+                if (complianceEntriesEl) {
+                    complianceEntriesEl.innerHTML = renderCompliancePage();
+                }
+            }
+
+            // --- Pagination ---
+            var prevBtn = document.getElementById('pp-prev');
+            var nextBtn = document.getElementById('pp-next');
+            var pageInfo = document.getElementById('pp-page-info');
+
+            function showPage(index) {
+                currentPage = Math.max(0, Math.min(index, totalPages - 1));
+                var pages = pagesContainer.querySelectorAll('.pp-page');
+                pages.forEach(function(p) { p.classList.remove('active'); });
+                var target = pagesContainer.querySelector('[data-page="' + currentPage + '"]');
+                if (target) target.classList.add('active');
+                if (prevBtn) prevBtn.disabled = (currentPage === 0);
+                if (nextBtn) nextBtn.disabled = (currentPage === totalPages - 1);
+                if (pageInfo) pageInfo.textContent = (currentPage + 1) + ' / ' + totalPages;
+                // Scroll pages container to top on page change
+                if (pagesContainer) pagesContainer.scrollTop = 0;
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', function() { showPage(currentPage - 1); });
+            if (nextBtn) nextBtn.addEventListener('click', function() { showPage(currentPage + 1); });
+
+            // --- Auditor Card Click → Detail Page ---
+            document.querySelectorAll('.pp-auditor-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var idx = parseInt(card.getAttribute('data-auditor-index'), 10);
+                    showPage(idx + 2); // page 0 is summary, page 1 is compliance, auditor pages start at 2
+                });
+            });
+
+            // --- Tier 2 Toggle ---
+            var tier2Toggle = document.getElementById('pp-tier2-toggle');
+            var tier2Cards = document.getElementById('pp-tier2-cards');
+            var tier2Chevron = document.getElementById('pp-tier2-chevron');
+            var tier2Label = document.getElementById('pp-tier2-label');
+            var tier2Open = false;
+
+            if (tier2Toggle && tier2Cards) {
+                tier2Toggle.addEventListener('click', function() {
+                    tier2Open = !tier2Open;
+                    tier2Cards.style.display = tier2Open ? 'flex' : 'none';
+                    if (tier2Chevron) tier2Chevron.classList.toggle('open', tier2Open);
+                    if (tier2Label) tier2Label.textContent = tier2Open ? 'Hide 6' : 'Show 6';
+                });
+            }
+
+            // --- Copy Model ID ---
+            var copyModelIdBtn = document.getElementById('pp-copy-model-id');
+            if (copyModelIdBtn) {
+                copyModelIdBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText('sha256:7f3a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9d1');
+                    var icon = copyModelIdBtn.querySelector('i');
+                    if (icon) { icon.className = 'ph ph-check'; icon.style.color = '#22c55e'; }
+                    setTimeout(function() { if (icon) { icon.className = 'ph ph-copy'; icon.style.color = ''; } }, 2000);
+                });
+            }
+
+            // --- Copy Verify Command ---
+            var copyVerifyBtn = document.getElementById('pp-copy-verify-cmd');
+            if (copyVerifyBtn) {
+                copyVerifyBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText('snpguest verify attestation ./report.bin ./certs/');
+                    var icon = copyVerifyBtn.querySelector('.pp-copy-icon');
+                    if (icon) { icon.className = 'ph ph-check pp-copy-icon'; icon.style.color = '#22c55e'; }
+                    setTimeout(function() { if (icon) { icon.className = 'ph ph-copy pp-copy-icon'; icon.style.color = ''; } }, 2000);
+                });
+            }
+
+            // --- Download Attestation Bundle ---
+            var downloadBtn = document.getElementById('pp-download-bundle');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function() {
+                    var bundle = {
+                        version: '1.0.0',
+                        generated_at: new Date().toISOString(),
+                        agent_id: 'sovereign-agent-demo',
+                        attestation: {
+                            tee_type: 'Intel TDX',
+                            quote: { format: 'tdx_report', data: 'BASE64_ENCODED_ATTESTATION_REPORT...', signature: 'BASE64_ENCODED_SIGNATURE...' },
+                            certificates: { vcek: 'BASE64_ENCODED_VCEK_CERTIFICATE...', ask: 'BASE64_ENCODED_ASK_CERTIFICATE...', ark: 'BASE64_ENCODED_ARK_CERTIFICATE...' },
+                            measurements: { launch_measurement: 'sha384:abc123...', host_data: 'sha256:def456...', report_data: 'sha256:ghi789...' },
+                        },
+                        verification_instructions: {
+                            step_1: 'Extract the attestation report from quote.data',
+                            step_2: 'Fetch the certificate chain from the hardware vendor',
+                            step_3: 'Verify the signature using the VCEK certificate',
+                            step_4: 'Compare measurements against published values in transparency log',
+                        },
+                        vendor_endpoints: {
+                            amd_kds: 'https://kdsintf.amd.com',
+                            intel_pcs: 'https://api.trustedservices.intel.com/sgx/certification/v4',
+                            nvidia_nras: 'https://nras.attestation.nvidia.com',
+                        },
+                    };
+                    var blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'attestation-bundle-passport.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            }
+
+            // --- QR Code ---
+            var qrCanvas = document.getElementById('pp-qr-canvas');
+            if (qrCanvas && typeof QRCode !== 'undefined') {
+                QRCode.toCanvas(qrCanvas, window.location.origin + '/verify/', {
+                    width: 48,
+                    margin: 1,
+                    color: { dark: '#eab308', light: '#1a1a1a' },
+                    errorCorrectionLevel: 'M',
+                });
+            }
+
+            // --- Open / Close Passport ---
+            function openPassport() {
+                if (passportPopup) passportPopup.classList.add('active');
+                if (chatCard) chatCard.classList.add('dimmed');
+                if (tooltip) tooltip.style.display = 'none';
+                showPage(0); // Reset to summary on open
+            }
+
+            function closePassport() {
+                if (passportPopup) passportPopup.classList.remove('active');
+                if (chatCard) chatCard.classList.remove('dimmed');
+            }
+
+            if (trustmarkBtn) trustmarkBtn.addEventListener('click', openPassport);
+            if (closePassportBtn) closePassportBtn.addEventListener('click', closePassport);
+            if (passportPopup) {
+                passportPopup.addEventListener('click', function(e) {
+                    if (e.target === passportPopup) closePassport();
+                });
+            }
+        });
+    </script>
+    <script>
+        // Chart.js Initialization for Compliance Radar
+        document.addEventListener('DOMContentLoaded', () => {
+            const el = document.getElementById('complianceChart');
+            if (!el) return;
+            const ctx = el.getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['HIPAA', 'ITAR', 'GDPR', 'SOC2', 'MCP Firewall', 'TruthfulQA', 'CyberSecEval'],
+                    datasets: [
+                        {
+                            label: 'Sovereignty',
+                            data: [91, 43, 88, 32, 75, 95, 60],
+                            fill: true,
+                            backgroundColor: 'rgba(22, 101, 52, 0.2)',
+                            borderColor: '#166534',
+                            pointBackgroundColor: '#166534',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#166534'
+                        },
+                        {
+                            label: 'Integrity',
+                            data: [26, 94, 38, 82, 55, 40, 90],
+                            fill: true,
+                            backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                            borderColor: '#1e3a8a',
+                            pointBackgroundColor: '#1e3a8a',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#1e3a8a'
+                        },
+                        {
+                            label: 'Policy',
+                            data: [58, 72, 90, 45, 85, 30, 70],
+                            fill: true,
+                            backgroundColor: 'rgba(153, 27, 27, 0.2)',
+                            borderColor: '#991b1b',
+                            pointBackgroundColor: '#991b1b',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#991b1b'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10,
+                            left: 10,
+                            right: 10
+                        }
+                    },
+                    elements: {
+                        line: {
+                            borderWidth: 2
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true,
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            grid: {
+                                display: true,
+                                color: 'rgba(255, 255, 255, 0.1)',
+                                circular: false
+                            },
+                            pointLabels: {
+                                color: '#bbbcbf',
+                                font: {
+                                    family: '"Space Mono", monospace',
+                                    size: 10
+                                }
+                            },
+                            ticks: {
+                                display: false,
+                                backdropColor: 'transparent'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // --- OBSERVABILITY DASHBOARD LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const agents = [{
+                id: 'a1',
+                name: 'Agent-Alpha',
+                did: 'did:key:z6MkhaXgw...',
+                provider: 'NVIDIA H100',
+                region: 'us-east-1',
+                coords: { top: '35%', left: '25%' },
+                rtt: 12,
+                status: 'verified',
+                scores: [95, 88, 92, 100, 85, 90],
+                telemetry: { power: 420, flops: 88, temp: 65 },
+                logs: [
+                    { time: '14:30', msg: 'Verified TEE Attestation (TDX)' },
+                    { time: '14:28', msg: 'Handshake: us-east-gateway' }
+                ]
+            }, {
+                id: 'a2',
+                name: 'Agent-Beta',
+                did: 'did:key:z6Mkrm5...',
+                provider: 'Intel TDX',
+                region: 'eu-central-1',
+                coords: { top: '30%', left: '52%' },
+                rtt: 45,
+                status: 'warning',
+                scores: [80, 100, 60, 95, 90, 75],
+                telemetry: { power: 300, flops: 92, temp: 72 },
+                logs: [
+                    { time: '14:32', msg: 'WARN: High memory usage' },
+                    { time: '14:30', msg: 'Blocked Request: Invalid Region' }
+                ]
+            }, {
+                id: 'a3',
+                name: 'Agent-Gamma',
+                did: 'did:key:z6Mkf9a...',
+                provider: 'NVIDIA A100',
+                region: 'ap-northeast-1',
+                coords: { top: '40%', left: '80%' },
+                rtt: 120,
+                status: 'failed',
+                scores: [40, 60, 30, 50, 45, 20],
+                telemetry: { power: 150, flops: 12, temp: 40 },
+                logs: [
+                    { time: '14:33', msg: 'CRITICAL: Attestation Failed' }
+                ]
+            }, {
+                id: 'a4',
+                name: 'Agent-Delta',
+                did: 'did:key:z6Mkq2w...',
+                provider: 'AMD SEV',
+                region: 'us-west-2',
+                coords: { top: '45%', left: '15%' },
+                rtt: 22,
+                status: 'verified',
+                scores: [98, 95, 99, 90, 92, 96],
+                telemetry: { power: 380, flops: 75, temp: 58 },
+                logs: [
+                    { time: '14:34', msg: 'Verified TEE Attestation (SEV)' }
+                ]
+            }, {
+                id: 'a5',
+                name: 'Agent-Epsilon',
+                did: 'did:key:z6Mkj7x...',
+                provider: 'NVIDIA H100',
+                region: 'sa-east-1',
+                coords: { top: '70%', left: '32%' },
+                rtt: 85,
+                status: 'verified',
+                scores: [88, 85, 90, 95, 80, 85],
+                telemetry: { power: 450, flops: 60, temp: 62 },
+                logs: [
+                    { time: '14:35', msg: 'Audit Log Synced' }
+                ]
+            }];
+
+            let activeAgentId = agents[0].id;
+            let radarChart = null;
+            let throughputChart = null;
+
+            // Elements
+            const agentTableBody = document.getElementById('agent-table-body');
+            const chipContainer = document.getElementById('chip-container');
+            const agentCountVal = document.getElementById('agent-count');
+            const rttVal = document.getElementById('rtt-val');
+
+            const inspName = document.getElementById('insp-name');
+            const inspDid = document.getElementById('insp-did');
+            const valPower = document.getElementById('val-power');
+            const valFlops = document.getElementById('val-flops');
+            const valTemp = document.getElementById('val-temp');
+            const barPower = document.getElementById('bar-power');
+            const barFlops = document.getElementById('bar-flops');
+            const barTemp = document.getElementById('bar-temp');
+
+            function init() {
+                if (agentCountVal) agentCountVal.textContent = agents.length;
+                renderAgentTable();
+                renderMap();
+                initThroughputChart();
+                selectAgent(agents[0]);
+            }
+
+            function renderAgentTable() {
+                if (!agentTableBody) return;
+                agentTableBody.innerHTML = '';
+                agents.forEach(agent => {
+                    const tr = document.createElement('tr');
+                    tr.className = agent.id === activeAgentId ? 'active' : '';
+                    tr.onclick = () => selectAgent(agent);
+
+                    const latColor = agent.rtt < 30 ? 'var(--c-green)' : (agent.rtt < 100 ? 'var(--c-yellow)' : 'var(--c-red)');
+                    const avgScore = Math.round(agent.scores.reduce((a, b) => a + b) / agent.scores.length);
+
+                    tr.innerHTML = `
+                        <td>
+                            <div class="table-identity">
+                                <div class="table-status-indicator ${agent.status}"></div>
+                                <div>
+                                    <div style="color:var(--c-white); font-weight:600;">${agent.name}</div>
+                                    <div class="table-did-small" style="font-size:0.6rem; opacity:0.5;">${agent.did.substring(0, 16)}...</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="provider-badge">${agent.provider}</span></td>
+                        <td>${agent.region}</td>
+                        <td><span style="color:${latColor};">${agent.rtt}ms</span></td>
+                        <td><span class="compliance-pill">${avgScore}%</span></td>
+                        <td><span style="color:${agent.status === 'verified' ? 'var(--c-green)' : (agent.status === 'warning' ? 'var(--c-yellow)' : 'var(--c-red)')}; font-size:0.6rem; font-weight:700;">${agent.status.toUpperCase()}</span></td>
+                    `;
+                    agentTableBody.appendChild(tr);
+                });
+            }
+
+            function renderMap() {
+                if (!chipContainer) return;
+                chipContainer.innerHTML = '';
+                agents.forEach(agent => {
+                    const chip = document.createElement('div');
+                    chip.className = `chip-marker ${agent.id === activeAgentId ? 'active' : ''}`;
+                    chip.style.top = agent.coords.top;
+                    chip.style.left = agent.coords.left;
+                    chip.innerHTML = `<div class="chip-inner"></div><div class="chip-pulse"></div>`;
+                    chip.onclick = (e) => { e.stopPropagation(); selectAgent(agent); };
+                    chipContainer.appendChild(chip);
+                });
+            }
+
+            function selectAgent(agent) {
+                activeAgentId = agent.id;
+                renderAgentTable();
+                renderMap();
+
+                if (inspName) inspName.textContent = agent.name;
+                if (inspDid) inspDid.textContent = agent.did;
+                if (rttVal) rttVal.textContent = agent.rtt;
+                if (valPower) valPower.textContent = agent.telemetry.power + 'W';
+                if (barPower) barPower.style.width = (agent.telemetry.power / 500 * 100) + '%';
+                if (valFlops) valFlops.textContent = agent.telemetry.flops + '%';
+                if (barFlops) barFlops.style.width = agent.telemetry.flops + '%';
+                if (valTemp) valTemp.textContent = agent.telemetry.temp + '°C';
+                if (barTemp) barTemp.style.width = (agent.telemetry.temp / 100 * 100) + '%';
+
+                updateRadarChart(agent);
+            }
+
+            function updateRadarChart(agent) {
+                const ctx = document.getElementById('complianceRadar');
+                if (!ctx) return;
+                if (radarChart) radarChart.destroy();
+                radarChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['HIPAA', 'SOC2', 'ITAR', 'GDPR', 'AI Act', 'EXP'],
+                        datasets: [{
+                            data: agent.scores,
+                            backgroundColor: 'rgba(250, 204, 21, 0.1)',
+                            borderColor: 'var(--c-yellow)',
+                            pointBackgroundColor: 'var(--c-yellow)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                min: 0, max: 100,
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                angleLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                                pointLabels: { color: '#666', font: { family: 'Space Mono', size: 8 } },
+                                ticks: { display: false }
+                            }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            function initThroughputChart() {
+                const ctx = document.getElementById('throughputChart');
+                if (!ctx) return;
+                throughputChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: Array.from({ length: 30 }, (_, i) => ''),
+                        datasets: [{
+                            data: Array.from({ length: 30 }, () => Math.floor(Math.random() * 40) + 80),
+                            borderColor: '#4ECDC4',
+                            backgroundColor: 'rgba(78, 205, 196, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { display: false },
+                            y: { display: true, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#444', font: { size: 9 } } }
+                        },
+                        plugins: { legend: { display: false } },
+                        animation: { duration: 0 }
+                    }
+                });
+                setInterval(() => {
+                    const newData = throughputChart.data.datasets[0].data;
+                    newData.shift();
+                    newData.push(Math.floor(Math.random() * 40) + 80);
+                    throughputChart.update();
+                }, 1000);
+            }
+
+            init();
+        });
+
+        // Vertical Scroll Logic
+        function scrollVertical(direction) {
+            const container = document.getElementById('market-vertical');
+            if (!container) return;
+            const scrollAmount = 150;
+            container.scrollBy({
+                top: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile Navigation Toggle
+        (function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const navbar = document.querySelector('.navbar');
+
+            if (!navToggle || !navLinks) return;
+
+            // Create overlay element
+            const overlay = document.createElement('div');
+            overlay.className = 'nav-overlay';
+            document.body.appendChild(overlay);
+
+            // Toggle menu
+            navToggle.addEventListener('click', function() {
+                const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !isOpen);
+                navLinks.classList.toggle('is-open');
+                overlay.classList.toggle('is-visible');
+                document.body.style.overflow = !isOpen ? 'hidden' : '';
+            });
+
+            // Close menu when clicking overlay
+            overlay.addEventListener('click', function() {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navLinks.classList.remove('is-open');
+                overlay.classList.remove('is-visible');
+                document.body.style.overflow = '';
+            });
+
+            // Handle dropdown toggles on mobile
+            const dropdowns = document.querySelectorAll('.nav-item-dropdown');
+            dropdowns.forEach(function(dropdown) {
+                const link = dropdown.querySelector('.nav-link.has-dropdown');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 968) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('is-open');
+                        }
+                    });
+                }
+            });
+
+            // Close menu on window resize if open
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 968) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navLinks.classList.remove('is-open');
+                    overlay.classList.remove('is-visible');
+                    document.body.style.overflow = '';
+                    dropdowns.forEach(function(d) { d.classList.remove('is-open'); });
+                }
+            });
+
+            // Close menu when clicking a link
+            navLinks.querySelectorAll('a:not(.has-dropdown)').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 968) {
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navLinks.classList.remove('is-open');
+                        overlay.classList.remove('is-visible');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <script>
+        // Pricing tab slideshow
+        document.querySelectorAll('.pricing-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.pricingTab;
+                document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.pricing-slide').forEach(s => s.classList.remove('active'));
+                tab.classList.add('active');
+                document.querySelector(`[data-pricing-slide="${target}"]`).classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
