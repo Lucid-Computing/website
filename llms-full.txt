@@ -1,0 +1,114 @@
+# Lucid Computing
+
+> AI security and verification platform providing cryptographic compliance, sovereign AI infrastructure, and automated audit trails for enterprise AI deployments.
+
+- Website: https://lucidcomputing.ai
+- Documentation: https://lucidcomputing.ai/site/
+- Research: https://lucidcomputing.ai/labs.html
+
+## Company Overview
+
+Lucid Computing builds a verifiable AI platform that enables organizations to deploy AI with cryptographic proof of compliance. The platform uses Trusted Execution Environments (TEEs), zero-knowledge proofs, and hardware-signed audit trails to prove that AI models ran exactly where and how promised.
+
+The core product is a composable trust layer that wraps AI agents and models with compliance auditors — lightweight sidecar modules that enforce policies (GDPR, HIPAA, EU AI Act, ISO 42001, ITAR) and generate immutable, verifiable "AI Passports" as proof. This approach eliminates the "trust me" compliance gap that stalls enterprise AI adoption.
+
+The platform operates at the hardware level — using silicon identity, TEE attestation, and physics-based location proofs — making compliance verifiable rather than self-reported.
+
+## Architecture
+
+Lucid's composable trust layer consists of three core primitives:
+
+1. **Compliance Auditors**: Lightweight sidecar modules that attach to AI workloads (agents, models, pipelines) and enforce regulatory policies in real-time. Each auditor monitors a specific compliance domain (data residency, bias testing, copyright provenance, etc.) and generates cryptographic evidence.
+
+2. **AI Passports**: Immutable, hardware-signed certificates that prove an AI workload met specific compliance requirements. Passports are generated inside TEEs and cannot be forged or tampered with. They serve as court-ready, regulator-ready proof of compliance.
+
+3. **Silicon Identity**: Hardware root-of-trust using TEE-generated keys tied to physical processors. This enables cryptographic verification of where computation happened, which model ran, and what data was processed — without trusting any software layer.
+
+## Solutions
+
+### Compliance & Regulatory
+
+- [ISO 42001 Readiness Auditor](https://lucidcomputing.ai/solutions/iso-42001-readiness.html): Automates evidence collection for ISO 42001 AI management system certification, reducing the certification timeline from 12 months to 3-4 months. Continuously monitors AI systems against 39 ISO 42001 controls and generates audit-ready documentation. Targets enterprises seeking the emerging international standard for responsible AI management.
+
+- [EU AI Act Conformity Auditor](https://lucidcomputing.ai/solutions/eu-ai-act-conformity.html): Automated conformity assessments for EU AI Act high-risk AI systems. Maps AI deployments to risk categories, monitors prohibited practices, and generates Technical Documentation required under Article 11. Targets any organization deploying AI systems in the EU market, particularly those classified as high-risk under Annex III.
+
+- [Hiring Fairness Auditor](https://lucidcomputing.ai/solutions/hiring-fairness.html): Independent bias audits for AI hiring tools using four-fifths rule disparate impact testing and synthetic dataset validation. Generates court-ready defense certificates with tamper-proof TEE audit trails. Built for compliance with NYC Local Law 144, Colorado SB 21-169, and federal anti-discrimination requirements. Targets HR tech vendors and large enterprises using AI in recruiting workflows.
+
+- [Clean Data & Copyright Auditor](https://lucidcomputing.ai/solutions/clean-data-copyright.html): Training data provenance scanning that detects content from known pirated sources (Books3, The Pile, pirate libraries) and verifies license compatibility across training corpora. Generates a cryptographic AI Bill of Materials (AI-BOM) documenting data lineage. Targets AI labs, foundation model builders, and companies facing investor due diligence on training data provenance.
+
+- [Clinical Validation Auditor (FDA)](https://lucidcomputing.ai/solutions/clinical-validation-fda.html): Automated validation and documentation for AI/ML medical devices targeting FDA 510(k) submissions. Generates Predetermined Change Control Plans (PCCP), tracks data lineage with HIPAA-safe audit trails, and verifies alignment with Good Machine Learning Practice (GMLP). Can cut 6 months off submission timelines. Targets MedTech startups and device manufacturers navigating FDA AI/ML regulatory requirements.
+
+### Sovereignty & Data Residency
+
+- [Sovereign Shield](https://lucidcomputing.ai/solutions/sovereign-shield.html): Hardware-level location attestation for data residency compliance. Uses TEE silicon identity combined with round-trip-time (RTT) triangulation — physics-based latency measurements bounded by the speed of light — to cryptographically prove where computation physically occurs. Cannot be spoofed via IP manipulation. Targets organizations under Middle East data sovereignty laws, defense contractors, and export-controlled markets.
+
+- [Sovereign AI & Data Residency](https://lucidcomputing.ai/solutions/sovereign-ai.html): National-scale sovereign AI infrastructure with cryptographic proof of data location and model integrity. Verifies which exact model served each request and where data was processed, preventing "sovereignty washing." Supports global deployment on any cloud while maintaining jurisdictional control. Targets national governments and cloud providers operating across multiple regulatory jurisdictions.
+
+- [Digital Embassies](https://lucidcomputing.ai/solutions/digital-embassies.html): Sovereign cloud enclaves for AI services in foreign jurisdictions. Uses a cryptographic handshake protocol where data remains encrypted until the TEE proves compliance with both host and home jurisdiction requirements. Adds approximately 4-6ms enclave latency with no meaningful performance penalty. Targets cloud providers and AI vendors expanding into GDPR/Schrems II jurisdictions.
+
+### Infrastructure & National Security
+
+- [Export Control Compliance](https://lucidcomputing.ai/solutions/export-control.html): Hardware-rooted verification for advanced AI chip and model export regulations (EAR, ITAR, OFAC, BIS). Scales to 100,000+ chip deployment sites with zero performance overhead using network-rooted verification through existing infrastructure. Cryptographically proves model architecture compliance without exposing IP. Targets hardware manufacturers (NVIDIA-scale) and cloud providers in restricted markets.
+
+- [Datacenter Observability](https://lucidcomputing.ai/solutions/datacenter-observability.html): Hardware-rooted visibility into AI infrastructure that bypasses hypervisor and firmware opacity. Deploys TEE monitoring agents as sidecars with direct access to the silicon security processor, generating immutable hardware-signed logs. Provides a source of truth independent of the cloud provider's own monitoring. Targets financial institutions and government agencies with mission-critical workloads on public cloud.
+
+- [Confidential Model Audits](https://lucidcomputing.ai/solutions/confidential-model-audits.html): Resolves the "transparency paradox" where regulators demand AI audits but model labs refuse to expose proprietary weights. Uses a "Blind Handshake" protocol where audits execute inside a TEE on a neutral node — only the audit report is released, all IP is wiped. Zero IP exposure with full regulatory proof. Targets foundation model builders and AI labs under EU AI Act scrutiny.
+
+- [Legacy to Cloud Migration](https://lucidcomputing.ai/solutions/legacy-to-cloud.html): Secure lift-and-shift migration of regulated legacy workloads to public cloud using sovereign containers — encrypted binaries with cryptographic isolation from the hypervisor and OS. Requires zero code refactoring. Achieves 30-50% TCO reduction while maintaining data sovereignty guarantees. Targets enterprises with regulated legacy systems stuck in expensive on-premises datacenters.
+
+## Industries
+
+- [Finance & Banking](https://lucidcomputing.ai/industries/finance.html): Confidential algo-trading, AI risk model auditing, and regulatory compliance for financial services. Hardware-level proof that trading models and customer data never leave approved jurisdictions. Addresses MiFID II, SOX, Basel III, and PCI DSS requirements.
+
+- [Healthcare & Life Sciences](https://lucidcomputing.ai/industries/healthcare.html): Precision medicine and collaborative research with HIPAA-compliant confidential computing. Enables multi-institutional AI model training on sensitive patient data without data sharing. Supports FDA AI/ML device submissions and clinical trial documentation.
+
+- [Public Sector & Government](https://lucidcomputing.ai/industries/public-sector.html): Provable privacy for citizen data and sovereign AI deployments. Hardware attestation that government AI systems process data within national boundaries. Addresses FedRAMP, NIST 800-53, and national data sovereignty mandates.
+
+- [Cloud & Infrastructure Providers](https://lucidcomputing.ai/industries/cloud-providers.html): Verifiable compute platform for sovereign and regulated workloads. Enables cloud providers to offer cryptographic proof of compliance to their customers, unlocking regulated markets. Supports multi-cloud and hybrid deployments.
+
+- [Defense & National Security](https://lucidcomputing.ai/industries/defense.html): Anti-tamper AI for tactical edge environments. Hardware-rooted protection against model theft, adversarial manipulation, and unauthorized access in contested environments. Addresses ITAR, CMMC, and classified workload requirements.
+
+## Key Technical Concepts
+
+- **Trusted Execution Environments (TEEs)**: Hardware-isolated enclaves (Intel SGX, Intel TDX, AMD SEV, ARM CCA, NVIDIA H100 Confidential Computing) that process data in encrypted memory inaccessible to the OS, hypervisor, or cloud administrator.
+
+- **Silicon Identity**: Cryptographic keys generated inside TEEs and bound to specific physical processors. Provides unforgeable hardware root-of-trust for attestation.
+
+- **RTT Triangulation**: Round-trip-time latency measurements bounded by the speed of light used to cryptographically verify the physical location of hardware. Cannot be spoofed via VPN or IP manipulation.
+
+- **AI Passports**: Hardware-signed, immutable compliance certificates generated inside TEEs that prove an AI workload met specific regulatory requirements.
+
+- **Zero-Knowledge Proofs**: Cryptographic methods that allow verification of a claim (e.g., "this model passes fairness tests") without revealing the underlying data (model weights, training data).
+
+- **Attestation**: Cryptographic verification that specific software is running inside a specific TEE on specific hardware, proving the integrity of the execution environment.
+
+## Regulatory Frameworks Supported
+
+ISO 42001, EU AI Act, GDPR, HIPAA, FDA 510(k), NYC Local Law 144, ITAR, EAR, OFAC, BIS, FedRAMP, NIST 800-53, NIST 800-190, SOC 1, SOC 2, PCI DSS, FIPS, ISO 27017, MiFID II, SOX, Basel III, CMMC, Schrems II, Colorado SB 21-169.
+
+## Lucid Labs (Research Division)
+
+Lucid Labs is the research arm of Lucid Computing, advancing the science of verifiable compute. Current research areas:
+
+- **Confidential Inference at Scale**: Extending context windows and throughput for LLMs running inside TEEs and GPU enclaves.
+- **Verifiable Training**: Cryptographic evidence chains for the full training pipeline — from data provenance through gradient computation to checkpoint attestation.
+- **Remote Location Verification**: Physics-based location proofs using speed-of-light bounded latency measurements for data sovereignty.
+- **Treaty Verification & AI Governance**: Bridging hardware-level verification with international AI policy, including a framework for AI treaty verification primitives.
+- **AI Infrastructure Field Guide**: Open research facility at Equinix SV4 for power monitoring, network verification, and physical audit research.
+
+Research access: https://lucid-computing-labs.github.io/ai-infra-field-guide/
+
+## Developer Resources
+
+- [Developer Portal](https://lucidcomputing.ai/developers/): SDK, CLI, and integration guides for the composable trust layer.
+- [Documentation](https://lucidcomputing.ai/site/): Full technical documentation for the Lucid SDK, CLI, and Schemas.
+
+## Insights
+
+- [Blog](https://lucidcomputing.ai/insights.html): Articles on AI security, sovereign AI, export controls, and compliance automation.
+
+## Contact
+
+- Website: https://lucidcomputing.ai
+- [Book a Demo](https://lucidcomputing.ai/#cta)
+- Email: info@lucidcomputing.ai

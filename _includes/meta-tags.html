@@ -1,0 +1,13 @@
+<meta name="description" content="{{ include.description }}">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="{{ include.canonical }}">
+<meta property="og:type" content="{{ include.og_type | default: 'website' }}">
+<meta property="og:url" content="{{ include.canonical }}">
+<meta property="og:title" content="{{ include.title }}">
+<meta property="og:description" content="{{ include.description }}">
+<meta property="og:image" content="{{ include.image | default: 'https://lucidcomputing.ai/media/og-default.png' }}">
+<meta property="og:site_name" content="Lucid Computing">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="{{ include.title }}">
+<meta property="twitter:description" content="{{ include.description }}">
+<meta property="twitter:image" content="{{ include.image | default: 'https://lucidcomputing.ai/media/og-default.png' }}">

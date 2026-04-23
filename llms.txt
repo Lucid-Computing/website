@@ -1,0 +1,46 @@
+# Lucid Computing
+
+> AI security and verification platform providing cryptographic compliance, sovereign AI infrastructure, and automated audit trails for enterprise AI deployments.
+
+- Full details: [llms-full.txt](https://lucidcomputing.ai/llms-full.txt)
+
+Lucid Computing builds a verifiable AI platform that enables organizations to deploy AI with cryptographic proof of compliance. The platform uses Trusted Execution Environments (TEEs), zero-knowledge proofs, and hardware-signed audit trails to prove that AI models ran exactly where and how promised.
+
+The core product is a composable trust layer that wraps AI agents and models with compliance auditors — lightweight sidecar modules that enforce policies (GDPR, HIPAA, EU AI Act, ISO 42001, ITAR) and generate immutable, verifiable "AI Passports" as proof.
+
+## Solutions
+
+- [ISO 42001 Readiness Auditor](https://lucidcomputing.ai/solutions/iso-42001-readiness.html): Automated ISO 42001 evidence collection that shortens certification from 12 months to 3-4 months.
+- [EU AI Act Conformity Auditor](https://lucidcomputing.ai/solutions/eu-ai-act-conformity.html): Automated conformity assessments for EU AI Act high-risk AI systems.
+- [Hiring Fairness Auditor](https://lucidcomputing.ai/solutions/hiring-fairness.html): Independent bias audits for AI hiring tools with mathematical proof of fairness for NYC LL 144 and federal courts.
+- [Clean Data & Copyright Auditor](https://lucidcomputing.ai/solutions/clean-data-copyright.html): Training data provenance scanning and cryptographic Bill of Materials for IP protection.
+- [Clinical Validation Auditor (FDA)](https://lucidcomputing.ai/solutions/clinical-validation-fda.html): Automated validation and documentation for AI/ML medical devices and 510(k) submissions.
+- [Sovereign Shield](https://lucidcomputing.ai/solutions/sovereign-shield.html): Hardware-level location attestation for data residency and sovereignty compliance.
+- [Sovereign AI & Data Residency](https://lucidcomputing.ai/solutions/sovereign-ai.html): Verifiable national-scale sovereign AI infrastructure with cryptographic proof of data location.
+- [Export Control Compliance](https://lucidcomputing.ai/solutions/export-control.html): Hardware-rooted proof of compliance for advanced AI chip and model export regulations.
+- [Datacenter Observability](https://lucidcomputing.ai/solutions/datacenter-observability.html): Hardware-rooted visibility into AI infrastructure integrity and performance.
+- [Confidential Model Audits](https://lucidcomputing.ai/solutions/confidential-model-audits.html): Audit AI model safety and compliance without exposing proprietary weights or IP.
+- [Digital Embassies](https://lucidcomputing.ai/solutions/digital-embassies.html): Sovereign cloud enclaves for AI services in foreign jurisdictions with cryptographic regulatory proof.
+- [Legacy to Cloud Migration](https://lucidcomputing.ai/solutions/legacy-to-cloud.html): Secure migration of mission-critical legacy workloads to the public cloud with sovereignty guarantees.
+
+## Industries
+
+- [Finance & Banking](https://lucidcomputing.ai/industries/finance.html): Confidential algo-trading and AI compliance for financial services.
+- [Healthcare & Life Sciences](https://lucidcomputing.ai/industries/healthcare.html): Precision medicine and collaborative research with HIPAA-compliant confidential computing.
+- [Public Sector & Government](https://lucidcomputing.ai/industries/public-sector.html): Provable privacy for citizen data and sovereign AI deployments.
+- [Cloud & Infrastructure Providers](https://lucidcomputing.ai/industries/cloud-providers.html): Verifiable compute platform for sovereign and regulated workloads.
+- [Defense & National Security](https://lucidcomputing.ai/industries/defense.html): Anti-tamper AI for tactical edge environments.
+
+## Developer Resources
+
+- [Developer Portal](https://lucidcomputing.ai/developers/): SDK, CLI, and integration guides for the composable trust layer.
+- [Documentation](https://lucidcomputing.ai/site/): Full technical documentation for the Lucid SDK, CLI, and Schemas.
+
+## Insights
+
+- [Blog](https://lucidcomputing.ai/insights.html): Articles on AI security, sovereign AI, export controls, and compliance.
+
+## Contact
+
+- [Book a Demo](https://lucidcomputing.ai/#cta): Request a demo of the Lucid platform.
+- [Lucid Labs](https://lucidcomputing.ai/labs.html): Research division advancing the science of verifiable compute.

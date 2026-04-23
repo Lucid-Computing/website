@@ -1,0 +1,2 @@
+# Cloudflare Pages SPA-style rewrite for verify routes
+/verify/*  /verify/index.html  200
